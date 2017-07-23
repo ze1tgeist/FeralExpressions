@@ -10,8 +10,8 @@
     <ProjectGuid>{62014D5D-54B1-4B40-9080-47C1C5C6F117}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FeralExpressions</RootNamespace>
-    <AssemblyName>FeralExpressions</AssemblyName>
+    <RootNamespace>FeralExpressions.Generator</RootNamespace>
+    <AssemblyName>FeralExpressions.Generator</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -137,8 +137,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpressionsPartialClassGenerator.cs" />
     <Compile Include="MethodToExpressionConverter.cs" />
-    <Compile Include="MethodToExpressionRewriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

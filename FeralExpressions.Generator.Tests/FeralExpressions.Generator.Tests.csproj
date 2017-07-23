@@ -162,6 +162,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpressionsPartialClassGeneratorTests.cs" />
     <Compile Include="MethodToExpressionConverterTests.cs" />
     <Compile Include="OuterNonPartialClass.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -180,9 +181,9 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FeralExpressions\FeralExpressions.csproj">
+    <ProjectReference Include="..\FeralExpressions.Generator\FeralExpressions.Generator.csproj">
       <Project>{62014d5d-54b1-4b40-9080-47c1c5c6f117}</Project>
-      <Name>FeralExpressions</Name>
+      <Name>FeralExpressions.Generator</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

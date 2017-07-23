@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeralExpressions
+namespace FeralExpressions.Generator
 {
     public class MethodToExpressionConverter
     {

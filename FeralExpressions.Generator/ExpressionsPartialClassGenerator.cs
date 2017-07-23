@@ -1,0 +1,143 @@
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FeralExpressions.Generator
+{
+    public class ExpressionsPartialClassGenerator
+    {
+        public ExpressionsPartialClassGenerator(MethodToExpressionConverter methodConverter)
+        {
+            this.methodConverter = methodConverter;
+        }
+
+        public void GenerateFile(string csPath)
+        {
+            var root = ReadRoot(csPath);
+
+            var expressionsRoot = Generate(root);
+            if (expressionsRoot != null)
+            {
+                var expressionsCsPath = System.IO.Path.ChangeExtension(csPath, ".expressions.cs");
+
+                using (var writer = new StreamWriter(expressionsCsPath))
+                {
+                    writer.Write(expressionsRoot.ToFullString());
+                }
+            }
+        }
+
+        public CompilationUnitSyntax Generate(CompilationUnitSyntax sourceRoot)
+        {
+            var methodExpressions =
+                sourceRoot.DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Select(m => new MethodExpression()
+                {
+                    Method = m,
+                    Expression = methodConverter.Convert(m)
+                })
+                .Where(pc => pc.Expression != null)
+                .ToList();
+
+            if (methodExpressions.Any())
+            {
+                return (CompilationUnitSyntax)ConvertNode(sourceRoot, methodExpressions);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        private SyntaxNode ConvertNode(SyntaxNode oldNode, List<MethodExpression> expressionsStillToHome)
+        {
+            if (oldNode is CompilationUnitSyntax root)
+            {
+                return root
+                    .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(GetMembers(root, expressionsStillToHome)))
+                    .WithUsings(
+                        root.Usings.Add(
+                            root.Usings.First().WithName(
+                                SyntaxFactory.QualifiedName(
+                                    SyntaxFactory.QualifiedName(
+                                        SyntaxFactory.IdentifierName("System"),
+                                        SyntaxFactory.IdentifierName("Linq")
+                                    ),
+                                    SyntaxFactory.IdentifierName("Expressions")
+                                )
+                            )
+                        )
+                     );
+            }
+            if (oldNode is ClassDeclarationSyntax classDec)
+            {
+                return classDec
+                    .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(GetMembers(classDec, expressionsStillToHome)));
+            }
+            if (oldNode is NamespaceDeclarationSyntax namespaceDec)
+            {
+                return namespaceDec
+                    .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(GetMembers(namespaceDec, expressionsStillToHome)));
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private IEnumerable<MemberDeclarationSyntax> GetMembers(SyntaxNode oldNode, List<MethodExpression> expressionsStillToHome)
+        {
+            int i = 0;
+            while (i < expressionsStillToHome.Count())
+            {
+                var me = expressionsStillToHome[i];
+
+                if (me.Method.Parent == oldNode)
+                {
+                    expressionsStillToHome.RemoveAt(i);
+                    yield return me.Expression;
+                }
+                else if (me.Method.Ancestors().Contains(oldNode))
+                {
+                    yield return (MemberDeclarationSyntax)ConvertNode(me.Method.Ancestors().TakeWhile(a => a != oldNode).Last(), expressionsStillToHome);
+                }
+                else
+                {
+                    i += 1;
+                }
+            }
+        }
+
+        private class MethodExpression
+        {
+            public MemberDeclarationSyntax Method { get; set; }
+            public MemberDeclarationSyntax Expression { get; set; }
+        }
+
+        private CompilationUnitSyntax ReadRoot(string path)
+        {
+            var code = ReadFile(path);
+            var tree = CSharpSyntaxTree.ParseText(code);
+            return (CompilationUnitSyntax)tree.GetRoot();
+
+        }
+
+        private static string ReadFile(string path)
+        {
+            using (StreamReader reader = new StreamReader(path))
+            {
+                return reader.ReadToEnd();
+            }
+        }
+
+        private MethodToExpressionConverter methodConverter;
+    }
+}
