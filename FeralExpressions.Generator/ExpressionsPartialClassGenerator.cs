@@ -17,7 +17,7 @@ namespace FeralExpressions.Generator
             this.methodConverter = methodConverter;
         }
 
-        public void GenerateFile(string csPath)
+        public string GenerateFile(string csPath)
         {
             var root = ReadRoot(csPath);
 
@@ -30,7 +30,10 @@ namespace FeralExpressions.Generator
                 {
                     writer.Write(expressionsRoot.ToFullString());
                 }
+                return expressionsCsPath;
             }
+            else
+                return null;
         }
 
         public CompilationUnitSyntax Generate(CompilationUnitSyntax sourceRoot)
