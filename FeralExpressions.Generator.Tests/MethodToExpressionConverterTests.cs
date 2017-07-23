@@ -36,7 +36,7 @@ namespace FeralExpressions.Generator.Tests
                     methodName: "PrivateMethodInOuterPartial",
                     expectedExpressionText: "        private Expression<Func<string>> PrivateMethodInOuterPartial_Expression =>\r\n        () => \"abc\";\r\n"
                 );
-        }
+        } 
 
         [TestMethod]
         public void MethodToExpressionConverter_converts_expression_bodied_method_in_outer_partial_class_with_interesting_args_to_expression()
