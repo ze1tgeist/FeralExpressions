@@ -14,8 +14,14 @@ namespace FeralExpressions
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
             var expr = GetExpressionEquivalent(node.Method);
-
-            return base.VisitMethodCall(node);
+            if (expr != null)
+            {
+                return InlineExpression(expr, node);
+            }
+            else
+            {
+                return base.VisitMethodCall(node);
+            }
         }
 
         private LambdaExpression GetExpressionEquivalent(MethodInfo method)
@@ -37,7 +43,18 @@ namespace FeralExpressions
 
         private Expression InlineExpression(LambdaExpression lambda, MethodCallExpression method)
         {
-            return null;
+            var parameterValues = new Dictionary<ParameterExpression, Expression>();
+            if (!method.Method.IsStatic)
+            {
+                parameterValues.Add(lambda.Parameters.First(), method.Object);
+            }
+            int offset = method.Method.IsStatic ? 0 : 1;
+            for (int i = 0; i < method.Arguments.Count(); i++)
+            {
+                parameterValues.Add(lambda.Parameters[i+offset], method.Arguments[i]);
+            }
+
+            return new LambdaParameterInlinerVisitor(parameterValues).Visit(lambda.Body).Inline();
         }
 
         private bool FunctionMatchesExpressionType(MethodInfo method, Type type)

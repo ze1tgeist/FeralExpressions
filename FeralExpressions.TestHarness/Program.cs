@@ -12,10 +12,9 @@ namespace FeralExpressions.TestHarness
         static void Main(string[] args)
         {
             var factory = new EntityFactory();
+            var dbContext = new MyDbContext(factory);
 
-            Expression<Func<Entity>> create = () => factory.CreateEntity(Guid.NewGuid(), "abcdef".Substring(2));
-
-            var create2 = create.Inline();
+            var query = dbContext.MyEntities.Where(e => e.Name.StartsWith("abc"));
         }
 
         

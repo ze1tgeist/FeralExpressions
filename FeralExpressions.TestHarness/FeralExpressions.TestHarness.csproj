@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Entity.cs" />
     <Compile Include="EntityFactory.cs" />
+    <Compile Include="MyDbContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,7 +58,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask AssemblyFile="D:\Projects\FeralExpressions\FeralExpressions.Generator\bin\Debug\FeralExpressions.Generator.dll" TaskName="FeralExpressions.Generator.ExpressionGenerationTask" />
+  <UsingTask AssemblyFile="C:\Projects\FeralExpressions\FeralExpressions.Generator\bin\Debug\FeralExpressions.Generator.dll" TaskName="FeralExpressions.Generator.ExpressionGenerationTask" />
   <Target Name="BeforeBuild">
     <ExpressionGenerationTask InputItems="@(Compile)">
       <Output TaskParameter="OutputItems" ItemName="ExpressionsCompile" />
