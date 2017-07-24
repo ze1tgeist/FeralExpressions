@@ -23,6 +23,14 @@ namespace FeralExpressions.Test
 
         public string MethodWithInterestingArgsInOuterPartial(string arg1, int arg2, string arg3) =>
             $"{arg1}+{arg2}+{arg3}";
+
+        public string MethodThatCallsAnInstanceMethod() =>
+            this.MethodInOuterPartial();
+
+        public string MethodThatCallsAStaticMethod() =>
+            StaticMethodInOuterPartial();
+
+        public static string StaticMethodInOuterPartial() => "def";
     }
 }
 

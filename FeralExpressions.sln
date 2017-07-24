@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeralExpressions.Generator.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeralExpressions.TestHarness", "FeralExpressions.TestHarness\FeralExpressions.TestHarness.csproj", "{E9A1803A-4A09-4461-BCEF-EE10DA4100F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeralExpressions", "FeralExpressions\FeralExpressions.csproj", "{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,14 @@ Global
 		{E9A1803A-4A09-4461-BCEF-EE10DA4100F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9A1803A-4A09-4461-BCEF-EE10DA4100F5}.Release|x86.ActiveCfg = Release|Any CPU
 		{E9A1803A-4A09-4461-BCEF-EE10DA4100F5}.Release|x86.Build.0 = Release|Any CPU
+		{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}.Debug|x86.Build.0 = Debug|Any CPU
+		{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}.Release|x86.ActiveCfg = Release|Any CPU
+		{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

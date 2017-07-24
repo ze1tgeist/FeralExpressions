@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E9A1803A-4A09-4461-BCEF-EE10DA4100F5}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>FeralExpressions.TestHarness</RootNamespace>
-    <AssemblyName>FeralExpressions.TestHarness</AssemblyName>
+    <ProjectGuid>{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FeralExpressions</RootNamespace>
+    <AssemblyName>FeralExpressions</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,28 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity.cs" />
-    <Compile Include="EntityFactory.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ExpressionInliningVisitor.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="LambdaParameterInlinerVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FeralExpressions\FeralExpressions.csproj">
-      <Project>{f4cbeae1-f2d3-453a-bc6e-b8f7af65d8df}</Project>
-      <Name>FeralExpressions</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask AssemblyFile="D:\Projects\FeralExpressions\FeralExpressions.Generator\bin\Debug\FeralExpressions.Generator.dll" TaskName="FeralExpressions.Generator.ExpressionGenerationTask" />
-  <Target Name="BeforeBuild">
-    <ExpressionGenerationTask InputItems="@(Compile)">
-      <Output TaskParameter="OutputItems" ItemName="ExpressionsCompile" />
-    </ExpressionGenerationTask>
-    <CreateItem Include="@(ExpressionsCompile)">
-      <Output TaskParameter="Include" ItemName="Compile" />
-    </CreateItem>
-  </Target>
 </Project>

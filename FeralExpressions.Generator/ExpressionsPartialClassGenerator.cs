@@ -12,9 +12,10 @@ namespace FeralExpressions.Generator
 {
     public class ExpressionsPartialClassGenerator
     {
-        public ExpressionsPartialClassGenerator(MethodToExpressionConverter methodConverter)
+        public ExpressionsPartialClassGenerator(MethodToExpressionConverter methodConverter, string extensionPrefix)
         {
             this.methodConverter = methodConverter;
+            this.extensionPrefix = extensionPrefix;
         }
 
         public string GenerateFile(string csPath)
@@ -24,7 +25,7 @@ namespace FeralExpressions.Generator
             var expressionsRoot = Generate(root);
             if (expressionsRoot != null)
             {
-                var expressionsCsPath = System.IO.Path.ChangeExtension(csPath, ".expressions.cs");
+                var expressionsCsPath = System.IO.Path.ChangeExtension(csPath, extensionPrefix + ".cs");
 
                 using (var writer = new StreamWriter(expressionsCsPath))
                 {
@@ -142,5 +143,6 @@ namespace FeralExpressions.Generator
         }
 
         private MethodToExpressionConverter methodConverter;
+        private string extensionPrefix;
     }
 }

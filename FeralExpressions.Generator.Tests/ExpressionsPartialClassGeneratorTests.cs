@@ -17,20 +17,20 @@ namespace FeralExpressions.Generator.Tests
         [TestMethod]
         public void ExpressionPartialClassGenerator_converts_OuterPartialClass()
         {
-            var sut = new ExpressionsPartialClassGenerator(new MethodToExpressionConverter());
+            var sut = new ExpressionsPartialClassGenerator(new MethodToExpressionConverter(), ".expressions");
 
             var root = ReadRoot(@"OuterPartialClass.cs");
 
             var actual = sut.Generate(root)?.ToFullString();
 
-            var expected = "using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing System.Linq.Expressions;\r\n\r\nnamespace FeralExpressions.Test\r\n{\r\n    partial class  OuterPartialClass\r\n    {\r\n        partial class NestedPartialClass\r\n        {\r\n            public Expression<Func<int>> MethodInNestedPartial_Expression =>\r\n            () => 0;\r\n        }\r\n        public Expression<Func<string>> MethodInOuterPartial_Expression =>\r\n        () => \"abc\";\r\n        private Expression<Func<string>> PrivateMethodInOuterPartial_Expression =>\r\n        () => \"abc\";\r\n        public Expression<Func<string,int,string,string>> MethodWithInterestingArgsInOuterPartial_Expression =>\r\n        (string arg1, int arg2, string arg3) =>\r\n            $\"{arg1}+{arg2}+{arg3}\";\r\n    }\r\n}\r\n\r\n\r\n";
+            var expected = "using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing System.Linq.Expressions;\r\n\r\nnamespace FeralExpressions.Test\r\n{\r\n    partial class  OuterPartialClass\r\n    {\r\n        partial class NestedPartialClass\r\n        {\r\n            public static Expression<Func<NestedPartialClass,int>> MethodInNestedPartial_Expression =>\r\n            (NestedPartialClass _this) => 0;\r\n        }\r\n        public static Expression<Func<OuterPartialClass,string>> MethodInOuterPartial_Expression =>\r\n        (OuterPartialClass _this) => \"abc\";\r\n        private static Expression<Func<OuterPartialClass,string>> PrivateMethodInOuterPartial_Expression =>\r\n        (OuterPartialClass _this) => \"abc\";\r\n        public static Expression<Func<OuterPartialClass,string,int,string,string>> MethodWithInterestingArgsInOuterPartial_Expression =>\r\n        (OuterPartialClass _this, string arg1, int arg2, string arg3) =>\r\n            $\"{arg1}+{arg2}+{arg3}\";\r\n        public static Expression<Func<OuterPartialClass,string>> MethodThatCallsAnInstanceMethod_Expression =>\r\n        (OuterPartialClass _this) =>\r\n            _this.MethodInOuterPartial();\r\n        public static Expression<Func<OuterPartialClass,string>> MethodThatCallsAStaticMethod_Expression =>\r\n        (OuterPartialClass _this) =>\r\n            StaticMethodInOuterPartial();\r\n        public static Expression<Func<string>> StaticMethodInOuterPartial_Expression =>\r\n        () => \"def\";\r\n    }\r\n}\r\n\r\n\r\n";
 
             Assert.AreEqual(expected, actual);
         }
 
         public void ExpressionPartialClassGenerator_converts_OuterNonPartialClass()
         {
-            var sut = new ExpressionsPartialClassGenerator(new MethodToExpressionConverter());
+            var sut = new ExpressionsPartialClassGenerator(new MethodToExpressionConverter(), ".expressions");
 
             var root = ReadRoot(@"OuterNonPartialClass.cs");
 
