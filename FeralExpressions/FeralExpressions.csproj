@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ExpressionInliningVisitor.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="InlineWrapper.cs" />
     <Compile Include="LambdaParameterInlinerVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
