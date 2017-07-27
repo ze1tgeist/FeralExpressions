@@ -15,6 +15,6 @@ namespace FeralExpressions.TestHarness
 
         public bool ValidateEntity(Guid id, string name) =>
             id != Guid.Empty
-            && !String.IsNullOrWhiteSpace(name);
+            && !String.IsNullOrEmpty(name);
     }
 }

@@ -17,6 +17,6 @@ namespace FeralExpressions.TestHarness
         public static Expression<Func<EntityFactory,Guid,string,bool>> ValidateEntity_Expression =>
         (EntityFactory _this, Guid id, string name) =>
             id != Guid.Empty
-            && !String.IsNullOrWhiteSpace(name);
+            && !String.IsNullOrEmpty(name);
     }
 }

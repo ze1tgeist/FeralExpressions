@@ -5,9 +5,16 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FeralExpressions")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription(
+@"This project supplies compile time support for FeralExpressions.
+For every.cs file which contains a partial class with one or more expression bodied method, it creates an equivalent of that
+method which has the same logic, but is a static Expression property.
+For example,
+public static string Test(string arg1) => ""abc"" + arg1;
+would produce
+public static Expression&lt;Func&lt;string,string&gt;&gt; Test_Expression => (string arg1) => ""abc"" + arg1;")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("ruben morton")]
 [assembly: AssemblyProduct("FeralExpressions")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
@@ -28,5 +35,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.0.1.0")]
+[assembly: AssemblyFileVersion("0.0.1.0")]
+[assembly: AssemblyInformationalVersion("0.0.1-alpha")]

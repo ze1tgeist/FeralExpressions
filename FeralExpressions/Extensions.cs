@@ -19,7 +19,7 @@ namespace FeralExpressions
 
         public static IQueryable<T> Inline<T>(this IQueryable<T> queryable)
         {
-            return new InlineWrapper<T>(queryable);
+            return new InlineQueryable<T>(queryable);
         }
 
     }

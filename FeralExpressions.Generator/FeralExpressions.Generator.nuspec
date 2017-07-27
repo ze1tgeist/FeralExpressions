@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>FeralExpressions.Generator</id>
+		<version>1.0.0</version>
+		<title>FeralExpressions.Generator</title>
+		<authors>ruben morton</authors>
+		<owners>ruben morton</owners>
+		<projectUrl>https://github.com/ze1tgeist/FeralExpressions</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>
+This project supplies compile time support for FeralExpressions.
+For every.cs file which contains a partial class with one or more expression bodied method, it creates an equivalent of that
+method which has the same logic, but is a static Expression property.
+For example,
+public static string Test(string arg1) => ""abc"" + arg1;
+would produce
+public static Expression&lt;Func&lt;string,string&gt;&gt; Test_Expression => (string arg1) => ""abc"" + arg1;</description>
+		<summary>Compile time support for FeralExpressions</summary>
+		<releaseNotes>Initial Release</releaseNotes>
+		<copyright>Copyright 2017</copyright>
+		<tags>Linq EntityFramework Expressions Inline</tags>
+		<dependencies>			
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin\Release\*.dll" target="tools" />
+		<file src="FeralExpressions.Generator.targets" target="build" />
+	</files>
+</package>

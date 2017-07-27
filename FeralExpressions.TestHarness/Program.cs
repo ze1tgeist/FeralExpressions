@@ -15,6 +15,8 @@ namespace FeralExpressions.TestHarness
             var dbContext = new MyDbContext(factory);
 
             var query = dbContext.MyEntities.Where(e => e.Name.StartsWith("abc"));
+
+            var test = query.ToArray();
         }
 
         

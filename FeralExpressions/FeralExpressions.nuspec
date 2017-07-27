@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>FeralExpressions</id>
+		<version>1.0.0</version>
+		<title>FeralExpressions</title>
+		<authors>ruben morton</authors>
+		<owners>ruben morton</owners>
+		<projectUrl>https://github.com/ze1tgeist/FeralExpressions</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>
+FeralExpressions defines the expansion method .Inline() which can be called on either an expression,
+or an IQueryable. It replaces method calls in the expression with the method body.
+In order for this to work, the method must 
+(a) be declared in a partial class 
+(b) have an expression body 
+(c) have any references to this explicitly written</description>
+		<summary>Allows inline expansion of method calls in Expressions.</summary>
+		<releaseNotes>Initial Release</releaseNotes>
+		<copyright>Copyright 2017</copyright>
+		<tags>Linq EntityFramework Expressions Inline</tags>
+		<dependencies>
+			<dependency id="FeralExpressions.Generator" version="1.0.0" />
+		</dependencies>
+	</metadata>
+</package>
