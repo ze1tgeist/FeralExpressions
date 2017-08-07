@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>FeralExpressions</id>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 		<title>FeralExpressions</title>
 		<authors>ruben morton</authors>
 		<owners>ruben morton</owners>
@@ -20,7 +20,15 @@ In order for this to work, the method must
 		<copyright>Copyright 2017</copyright>
 		<tags>Linq EntityFramework Expressions Inline</tags>
 		<dependencies>
-			<dependency id="FeralExpressions.Generator" version="1.0.0" />
+			<dependency id="FeralExpressions.Generator" version="1.0.1" />
 		</dependencies>
 	</metadata>
+	<files>
+		<file src="bin\Release_45\*.dll" target="lib\net45" />
+		<file src="bin\Release_451\*.dll" target="lib\net451" />
+		<file src="bin\Release_452\*.dll" target="lib\net452" />
+		<file src="bin\Release_46\*.dll" target="lib\net46" />
+		<file src="bin\Release_461\*.dll" target="lib\net461" />
+		<file src="bin\Release_462\*.dll" target="lib\net462" />
+	</files>
 </package>

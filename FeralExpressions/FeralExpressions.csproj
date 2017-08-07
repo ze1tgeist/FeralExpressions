@@ -9,11 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FeralExpressions</RootNamespace>
     <AssemblyName>FeralExpressions</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition="$(Configuration.StartsWith('Debug')) And '$(Platform)' == 'AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,13 +21,91 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition="$(Configuration.StartsWith('Release')) And '$(Platform)' == 'AnyCPU'">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.EndsWith('_45'))">
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <OutputPath>$(outputPath)\net45</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.EndsWith('_451'))">
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <OutputPath>$(outputPath)\net451</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.EndsWith('_452'))">
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <OutputPath>$(outputPath)\net452</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.EndsWith('_46'))">
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <OutputPath>$(outputPath)\net46</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.EndsWith('_461'))">
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <OutputPath>$(outputPath)\net461</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.EndsWith('_462'))">
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <OutputPath>$(outputPath)\net462</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release_45'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Release_45\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release_451'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Release_451\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release_452'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Release_452\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release_46'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Release_46\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release_461'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Release_461\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release_462'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Release_462\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
