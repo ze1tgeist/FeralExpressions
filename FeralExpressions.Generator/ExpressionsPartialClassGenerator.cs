@@ -20,9 +20,9 @@ namespace FeralExpressions.Generator
 
         public string GenerateFile(string csPath)
         {
-            var root = ReadRoot(csPath);
+            (var root, var semanticModel) = ReadRoot(csPath);
 
-            var expressionsRoot = Generate(root);
+            var expressionsRoot = Generate(root, semanticModel);
             if (expressionsRoot != null)
             {
                 var expressionsCsPath = System.IO.Path.ChangeExtension(csPath, extensionPrefix + ".cs");
@@ -37,7 +37,7 @@ namespace FeralExpressions.Generator
                 return null;
         }
 
-        public CompilationUnitSyntax Generate(CompilationUnitSyntax sourceRoot)
+        public CompilationUnitSyntax Generate(CompilationUnitSyntax sourceRoot, SemanticModel semanticModel = null)
         {
             var methodExpressions =
                 sourceRoot.DescendantNodes()
@@ -45,7 +45,7 @@ namespace FeralExpressions.Generator
                 .Select(m => new MethodExpression()
                 {
                     Method = m,
-                    Expression = methodConverter.Convert(m)
+                    Expression = methodConverter.Convert(m, semanticModel)
                 })
                 .Where(pc => pc.Expression != null)
                 .ToList();
@@ -126,11 +126,15 @@ namespace FeralExpressions.Generator
             public MemberDeclarationSyntax Expression { get; set; }
         }
 
-        private CompilationUnitSyntax ReadRoot(string path)
+        private (CompilationUnitSyntax root, SemanticModel semanticModel) ReadRoot(string path)
         {
             var code = ReadFile(path);
             var tree = CSharpSyntaxTree.ParseText(code);
-            return (CompilationUnitSyntax)tree.GetRoot();
+            var compilation = CSharpCompilation
+                .Create("assembly" + Guid.NewGuid().ToString("N")) // 32 digits, no hyphens or braces
+                .AddSyntaxTrees(tree);
+
+            return ((CompilationUnitSyntax)tree.GetRoot(), compilation.GetSemanticModel(tree));
 
         }
 

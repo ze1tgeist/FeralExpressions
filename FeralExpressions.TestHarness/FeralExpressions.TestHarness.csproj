@@ -76,4 +76,7 @@
       <Output TaskParameter="Include" ItemName="Compile" />
     </CreateItem>
   </Target>
+	<Target Name="AfterBuild">
+		<Delete Files="@(ExpressionsCompile)" />
+	</Target>
 </Project>

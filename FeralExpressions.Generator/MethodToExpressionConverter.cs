@@ -11,10 +11,15 @@ namespace FeralExpressions.Generator
 {
     public class MethodToExpressionConverter
     {
-        public PropertyDeclarationSyntax Convert(MethodDeclarationSyntax method)
+        public PropertyDeclarationSyntax Convert(MethodDeclarationSyntax method, SemanticModel semanticModel = null)
         {
             if (method.Body == null && method.ExpressionBody != null && AreAllParentClassesPartial(method))
             {
+                ISymbol methodSymbol = null;
+                if (semanticModel != null)
+                {
+                    methodSymbol = semanticModel.GetDeclaredSymbol(method);
+                }
                 var parentClass = (method.Parent as ClassDeclarationSyntax);
                 var methodIsStatic = method.Modifiers.Any(SyntaxKind.StaticKeyword);
                 var funcParamTypes =
@@ -45,7 +50,7 @@ namespace FeralExpressions.Generator
                     methodIsStatic
                         ? method.ParameterList
                         : SyntaxFactory.ParameterList(BuildStaticParamsWith_this(method, parentClass)).WithTrailingTrivia(SyntaxFactory.Space);
-                var methodExpression = (CSharpSyntaxNode)new ThisOrImplicitThisTo_ThisRewriter().Visit(method.ExpressionBody.Expression).WithLeadingTrivia(method.ExpressionBody.Expression.GetLeadingTrivia());
+                var methodExpression = (CSharpSyntaxNode)new ThisOrImplicitThisTo_ThisRewriter(semanticModel, methodSymbol).Visit(method.ExpressionBody.Expression).WithLeadingTrivia(method.ExpressionBody.Expression.GetLeadingTrivia());
                 var lamdaExpression = SyntaxFactory.ParenthesizedLambdaExpression(
                     SyntaxFactory.Token(SyntaxKind.None),
                     lambdaParameters.WithLeadingTrivia(SyntaxFactory.CarriageReturn,SyntaxFactory.LineFeed,method.GetLeadingTrivia().Last()),

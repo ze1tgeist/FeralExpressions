@@ -11,8 +11,8 @@ namespace FeralExpressions.TestHarness
     {
         public static Expression<Func<EntityFactory,Guid,string,Entity>> CreateEntity_Expression =>
         (EntityFactory _this, Guid id, string name) =>
-            _this.ValidateEntity(id, name)
-                ? new Entity() { Id = id, Name = name }
+            _this.ValidateEntity(id, name) && _this.ValidateEntity(id, name)
+                ? new Entity() { Id = id, Name = name.Substring(1).Substring(1) }
                 : null;
         public static Expression<Func<EntityFactory,Guid,string,bool>> ValidateEntity_Expression =>
         (EntityFactory _this, Guid id, string name) =>
