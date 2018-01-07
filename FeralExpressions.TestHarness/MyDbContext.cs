@@ -9,7 +9,7 @@ namespace FeralExpressions.TestHarness
 {
     class MyDbContext : DbContext
     {
-        public MyDbContext(EntityFactory factory)
+        public MyDbContext(EntityFactory factory) : base(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=FeralExpressions;Integrated Security=True")
         {
             this.factory = factory;
 

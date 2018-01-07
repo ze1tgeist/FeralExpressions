@@ -14,11 +14,12 @@ namespace FeralExpressions.TestHarness
             var factory = new EntityFactory();
             var dbContext = new MyDbContext(factory);
 
-            var query = dbContext.MyEntities.Where(e => e.Name.StartsWith("abc"));
+            var query = dbContext.MyEntities.Where(e => e.NamePlusId("-").StartsWith("cde"));
 
             var test = query.ToArray();
         }
 
         
     }
+
 }

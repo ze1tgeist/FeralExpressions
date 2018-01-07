@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace FeralExpressions.TestHarness
 {
-    class EntityDbInitializer : DropCreateDatabaseIfModelChanges<MyDbContext>
+    class EntityDbInitializer : DropCreateDatabaseAlways<MyDbContext>
     {
         protected override void Seed(MyDbContext context)
         {

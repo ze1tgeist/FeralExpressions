@@ -11,4 +11,10 @@ namespace FeralExpressions.TestHarness
         public Guid Id { get; internal set; }
         public string Name { get; internal set; }
     }
+
+    public static partial class EntityExtensions
+    {
+        public static string NamePlusId(this Entity ent, string seperator) =>
+            ent.Name + seperator + ent.Id.ToString();
+    }
 }

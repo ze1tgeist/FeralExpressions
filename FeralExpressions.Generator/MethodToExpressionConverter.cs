@@ -47,9 +47,11 @@ namespace FeralExpressions.Generator
                 var expressionType = SyntaxFactory.GenericName(expressionIdentifier, expressionTypedArgumentList).WithTriviaFrom(method.ReturnType);
 
                 var lambdaParameters =
-                    methodIsStatic
-                        ? method.ParameterList
-                        : SyntaxFactory.ParameterList(BuildStaticParamsWith_this(method, parentClass)).WithTrailingTrivia(SyntaxFactory.Space);
+                    SyntaxFactory.ParameterList(
+                        methodIsStatic
+                        ? RemoveThisFromExtensionMethod(method)
+                        : BuildStaticParamsWith_this(method, parentClass)
+                    ).WithTrailingTrivia(SyntaxFactory.Space);
                 var methodExpression = (CSharpSyntaxNode)new ThisOrImplicitThisTo_ThisRewriter(semanticModel, methodSymbol).Visit(method.ExpressionBody.Expression).WithLeadingTrivia(method.ExpressionBody.Expression.GetLeadingTrivia());
                 var lamdaExpression = SyntaxFactory.ParenthesizedLambdaExpression(
                     SyntaxFactory.Token(SyntaxKind.None),
@@ -83,6 +85,26 @@ namespace FeralExpressions.Generator
             else
                 return null;
 
+        }
+
+        private SeparatedSyntaxList<ParameterSyntax> RemoveThisFromExtensionMethod(MethodDeclarationSyntax method)
+        {
+            var parameters =
+                method
+                .ParameterList
+                .Parameters
+                .Select(p => RemoveThis(p));
+
+            return
+                SyntaxFactory.SeparatedList<ParameterSyntax>(parameters, Enumerable.Repeat(SyntaxFactory.Token(SyntaxKind.CommaToken).WithTrailingTrivia(SyntaxFactory.Space), parameters.Count() - 1));
+        }
+
+        private ParameterSyntax RemoveThis(ParameterSyntax parameter)
+        {
+            var modifiers = from m in parameter.Modifiers where m.Text != "this"  select m;
+            var modifiersList = SyntaxFactory.TokenList(modifiers);
+
+            return SyntaxFactory.Parameter(parameter.AttributeLists, modifiersList, parameter.Type, parameter.Identifier, parameter.Default);
         }
 
         private SeparatedSyntaxList<ParameterSyntax> BuildStaticParamsWith_this(MethodDeclarationSyntax method, ClassDeclarationSyntax parentClass)
