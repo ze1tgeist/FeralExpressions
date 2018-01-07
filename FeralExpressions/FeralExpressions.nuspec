@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>FeralExpressions</id>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 		<title>FeralExpressions</title>
 		<authors>ruben morton</authors>
 		<owners>ruben morton</owners>
@@ -16,8 +16,8 @@ In order for this to work, the method must
 (b) have an expression body 
 (c) have any references to this explicitly written</description>
 		<summary>Allows inline expansion of method calls in Expressions.</summary>
-		<releaseNotes>Initial Release</releaseNotes>
-		<copyright>Copyright 2017</copyright>
+		<releaseNotes>Fixed an issue where .expressions.cs files were being included twice in netcore projects</releaseNotes>
+		<copyright>Copyright 2018</copyright>
 		<tags>Linq EntityFramework Expressions Inline</tags>
 		<dependencies>
 			<dependency id="FeralExpressions.Generator" version="1.0.1" />
