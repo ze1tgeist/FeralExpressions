@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
-  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)..\tools\FeralExpressions.Generator.dll" TaskName="FeralExpressions.Generator.ExpressionGenerationTask" />
-  <Target Name="BeforeBuild">
-    <ExpressionGenerationTask InputItems="@(Compile)">
-      <Output TaskParameter="OutputItems" ItemName="ExpressionsCompile" />
-    </ExpressionGenerationTask>
-    <CreateItem Include="@(ExpressionsCompile)">
-      <Output TaskParameter="Include" ItemName="Compile" />
-    </CreateItem>
-  </Target>
+	<UsingTask AssemblyFile="$(MSBuildThisFileDirectory)..\tools\FeralExpressions.Generator.dll" TaskName="FeralExpressions.Generator.ExpressionGenerationTask" />
+	<Target Name="BeforeBuild">
+		<ExpressionGenerationTask InputItems="@(Compile)">
+			<Output TaskParameter="OutputItems" ItemName="ExpressionsCompile" />
+		</ExpressionGenerationTask>
+		<ItemGroup>
+			<Compile Include="@(ExpressionsCompile)" Exclude="@(Compile)" />
+		</ItemGroup>
+	</Target>
 </Project>
