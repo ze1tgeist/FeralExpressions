@@ -32,7 +32,11 @@ namespace FeralExpressions
             var property = method.DeclaringType.GetProperty(method.Name + "_Expression", bindingFlags);
             if (property != null && FunctionMatchesExpressionType(method, property.PropertyType))
             {
+#if NET_CORE
+                var expression = property.GetValue(null, null);
+#else
                 var expression = property.GetValue(null);
+#endif
                 return expression as LambdaExpression;
             }
             else

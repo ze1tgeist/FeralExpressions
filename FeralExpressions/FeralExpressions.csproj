@@ -1,134 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FeralExpressions</RootNamespace>
-    <AssemblyName>FeralExpressions</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.StartsWith('Debug')) And '$(Platform)' == 'AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.StartsWith('Release')) And '$(Platform)' == 'AnyCPU'">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.EndsWith('_45'))">
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <OutputPath>$(outputPath)\net45</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.EndsWith('_451'))">
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <OutputPath>$(outputPath)\net451</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.EndsWith('_452'))">
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <OutputPath>$(outputPath)\net452</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.EndsWith('_46'))">
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <OutputPath>$(outputPath)\net46</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.EndsWith('_461'))">
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <OutputPath>$(outputPath)\net461</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.EndsWith('_462'))">
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <OutputPath>$(outputPath)\net462</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release_45'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Release_45\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release_451'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Release_451\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release_452'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Release_452\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release_46'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Release_46\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release_461'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Release_461\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release_462'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Release_462\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ExpressionInliningVisitor.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="InlineQueryProvider.cs" />
-    <Compile Include="InlineQueryable.cs" />
-    <Compile Include="LambdaParameterInlinerVisitor.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="FeralExpressions.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+	<PropertyGroup>
+		<Configurations>Debug;Release;Release_45;Release_451;Release_452;Release_46;Release_461;Release_462;Release_netcore10;Release_netcore11;Release_netcore20</Configurations>
+		<Platforms>AnyCPU;x86</Platforms>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<ProjectGuid>{F4CBEAE1-F2D3-453A-BC6E-B8F7AF65D8DF}</ProjectGuid>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>FeralExpressions</RootNamespace>
+		<AssemblyName>FeralExpressions</AssemblyName>
+		<FileAlignment>512</FileAlignment>
+		<CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<TargetFramework>net462</TargetFramework>
+		<OutputPath>bin\Release</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Platform) == 'AnyCPU'">
+		<Prefer32Bit>false</Prefer32Bit>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration) == 'Debug'">
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<OutputPath>bin\Debug</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration) == 'Release_netcore10'">
+		<DefineConstants>NET_CORE</DefineConstants>
+		<TargetFramework>netcoreapp1.0</TargetFramework>
+		<OutputPath>bin\netstandard1.0</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration) == 'Release_netcore11'">
+		<DefineConstants>NET_CORE</DefineConstants>
+		<TargetFramework>netcoreapp1.1</TargetFramework>
+		<OutputPath>bin\netstandard1.1</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration) == 'Release_netcore20'">
+		<DefineConstants>NET_CORE</DefineConstants>
+		<TargetFramework>netcoreapp2.0</TargetFramework>
+		<OutputPath>bin\netstandard2.0</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release_45'">
+		<TargetFramework>net45</TargetFramework>
+		<OutputPath>bin\Release_45\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release_451'">
+		<TargetFramework>net451</TargetFramework>
+		<OutputPath>bin\Release_451\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release_452'">
+		<TargetFramework>net452</TargetFramework>
+		<OutputPath>bin\Release_452\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release_46'">
+		<TargetFramework>net46</TargetFramework>
+		<OutputPath>bin\Release_46\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release_461'">
+		<TargetFramework>net461</TargetFramework>
+		<OutputPath>bin\Release_461\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release_462'">
+		<TargetFramework>net462</TargetFramework>
+		<OutputPath>bin\Release_462\</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="System" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="ExpressionInliningVisitor.cs" />
+		<Compile Include="Extensions.cs" />
+		<Compile Include="InlineQueryProvider.cs" />
+		<Compile Include="InlineQueryable.cs" />
+		<Compile Include="LambdaParameterInlinerVisitor.cs" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="FeralExpressions.nuspec">
+			<SubType>Designer</SubType>
+		</None>
+	</ItemGroup>
+	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
