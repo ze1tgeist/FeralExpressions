@@ -217,6 +217,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpressionsPartialClassGeneratorTests.cs" />
+    <Compile Include="ExtensionMethods.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="MethodToExpressionConverterTests.cs" />
     <Compile Include="OuterNonPartialClass.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

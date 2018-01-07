@@ -20,7 +20,7 @@ namespace FeralExpressions
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            return queryable.Inner.Provider.CreateQuery<TElement>(expression.Inline());
+            return new InlineQueryable<TElement>(queryable.Inner.Provider.CreateQuery<TElement>(expression.Inline()));
         }
 
         public object Execute(Expression expression)

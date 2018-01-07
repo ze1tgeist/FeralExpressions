@@ -114,6 +114,17 @@ namespace FeralExpressions.Generator.Tests
                 );
         }
 
+        [TestMethod]
+        public void MethodToExpressionConverter_converts_extension_method()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ExtensionMethods.cs",
+                    methodName: "Append",
+                    expectedExpressionText: "        public static Expression<Func<string,string,string>> Append_Expression =>\r\n        (string str, string arg) => str + arg;\r\n"
+                );
+        }
+
 
         private void TestMethodToExpression(string codeFilePath, string methodName, string expectedExpressionText)
         {
