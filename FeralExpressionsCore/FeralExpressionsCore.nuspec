@@ -1,15 +1,16 @@
 <?xml version="1.0"?>
 <package >
 	<metadata>
-		<id>FeralExpressions</id>
+		<id>FeralExpressionsCore</id>
 		<version>1.1.0</version>
-		<title>FeralExpressions</title>
+		<title>FeralExpressionsCore</title>
 		<authors>ruben morton</authors>
 		<owners>ruben morton</owners>
 		<projectUrl>https://github.com/ze1tgeist/FeralExpressions</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
-FeralExpressions defines the expansion method .Inline() which can be called on either an expression,
+FeralExpressionsCore is the .net core equivalent of FeralExpressions.
+FeralExpressionsCore defines the expansion method .Inline() which can be called on either an expression,
 or an IQueryable. It replaces method calls in the expression with the method body.
 In order for this to work, the method must 
 (a) be declared in a partial class 
@@ -20,17 +21,12 @@ In order for this to work, the method must
 			- Added functionality to map the type used in OfType to a different type.  For example, the call MyInterfaceEntities.OfType&lt;InterfaceSubType&gt;() could convert to MyInterfaceEntities.OfType&lt;ActualSubType&gt;() when mapping between layers
 		</releaseNotes>
 		<copyright>Copyright 2018</copyright>
-		<tags>Linq EntityFramework Expressions Inline</tags>
+		<tags>Linq EntityFrameworkCore Expressions Inline</tags>
 		<dependencies>
 			<dependency id="FeralExpressions.Generator" version="1.0.3" />
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin\Release_45\*.dll" target="lib\net45" />
-		<file src="bin\Release_451\*.dll" target="lib\net451" />
-		<file src="bin\Release_452\*.dll" target="lib\net452" />
-		<file src="bin\Release_46\*.dll" target="lib\net46" />
-		<file src="bin\Release_461\*.dll" target="lib\net461" />
-		<file src="bin\Release_462\*.dll" target="lib\net462" />
+		<file src="bin\Release_netcore20\netcoreapp2.0\*.*" target="lib\netcoreapp2.0" />
 	</files>
 </package>

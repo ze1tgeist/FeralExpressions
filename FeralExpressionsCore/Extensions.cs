@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeralExpressions
+namespace FeralExpressionsCore
 {
     public static class Extensions
     {
@@ -22,7 +22,7 @@ namespace FeralExpressions
             return new InlineQueryable<T>(queryable);
         }
 
-        public static Expression MapTypes(this Expression source, IDictionary<Type, Type> mappings)
+        public static Expression MapTypes(this Expression source, IDictionary<Type,Type> mappings)
         {
             var mapper = new OfTypeMappingVisitor(mappings);
 

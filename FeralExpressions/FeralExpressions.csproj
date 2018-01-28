@@ -127,6 +127,9 @@
     <Compile Include="InlineQueryProvider.cs" />
     <Compile Include="InlineQueryable.cs" />
     <Compile Include="LambdaParameterInlinerVisitor.cs" />
+    <Compile Include="MappingQueryable.cs" />
+    <Compile Include="MappingQueryProvider.cs" />
+    <Compile Include="OfTypeMappingVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
