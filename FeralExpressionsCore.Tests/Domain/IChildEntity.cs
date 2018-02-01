@@ -4,8 +4,7 @@ using System.Text;
 
 namespace FeralExpressionsCore.Tests.Domain
 {
-    public interface ISubEntity : IEntity
+    public interface IChildEntity
     {
-        IEnumerable<IChildEntity> Children { get; }
     }
 }

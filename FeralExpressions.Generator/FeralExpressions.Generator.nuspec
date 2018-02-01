@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>FeralExpressions.Generator</id>
-		<version>1.0.3</version>
+		<version>1.1.1-alpha</version>
 		<title>FeralExpressions.Generator</title>
 		<authors>ruben morton</authors>
 		<owners>ruben morton</owners>
@@ -18,8 +18,7 @@ would produce
 public static Expression&lt;Func&lt;string,string&gt;&gt; Test_Expression => (string arg1) => ""abc"" + arg1;</description>
 		<summary>Compile time support for FeralExpressions</summary>
 		<releaseNotes>
-			- Resolved an issue with recursively inlining
-			- Added support for extension methods
+			- Fixed a bug where dotnet build command couldnt find Microsoft Build assemblies
 		</releaseNotes>
 		<copyright>Copyright 2018</copyright>
 		<tags>Linq EntityFramework Expressions Inline</tags>
