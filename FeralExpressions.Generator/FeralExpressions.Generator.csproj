@@ -8,7 +8,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{62014D5D-54B1-4B40-9080-47C1C5C6F117}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FeralExpressions.Generator</RootNamespace>
     <AssemblyName>FeralExpressions.Generator</AssemblyName>
@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>FeralExpressions.Generator.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -244,7 +244,9 @@
   <ItemGroup>
     <Compile Include="ExpressionGenerationTask.cs" />
     <Compile Include="ExpressionsPartialClassGenerator.cs" />
+    <Compile Include="GeneratorRunner.cs" />
     <Compile Include="MethodToExpressionConverter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThisOrImplicitThisTo_ThisRewriter.cs" />
   </ItemGroup>

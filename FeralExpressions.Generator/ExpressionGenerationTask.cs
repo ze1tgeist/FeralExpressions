@@ -4,6 +4,7 @@ using System;
 using Microsoft.Build.Utilities;
 using Microsoft.Build.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FeralExpressions.Generator
 {
@@ -19,28 +20,18 @@ namespace FeralExpressions.Generator
 
         public override bool Execute()
         {
-            Log.LogMessage($"ExpressionGenerationTask: generating *{ExpressionsExtensionPrefix}.cs files");
+            var runner = new GeneratorRunner(ExpressionsExtensionPrefix, msg => Log.LogMessage(msg));
 
-            var generator = new ExpressionsPartialClassGenerator(new MethodToExpressionConverter(), ExpressionsExtensionPrefix);
-
+            var outputFileNames = runner.RunGenerator(from i in InputItems select i.ItemSpec);
             var outputs = new List<ITaskItem>();
-
-            foreach (ITaskItem item in InputItems)
+            foreach (var output in outputFileNames)
             {
-                string output = generator.GenerateFile(item.ItemSpec);
-                if (!String.IsNullOrEmpty(output))
-                {
-                    var outputItem = new TaskItem(output);
-                    outputItem.SetMetadata("DependentUpon", item.ItemSpec);
-                    outputItem.SetMetadata("SubType", "ExpressionPartialClass");
-                    outputs.Add(outputItem);
-                    Log.LogMessage($"ExpressionGenerationTask: generated {output}");
-                }
+                var outputItem = new TaskItem(output);
+                outputItem.SetMetadata("SubType", "ExpressionPartialClass");
+                outputs.Add(outputItem);
             }
-
             OutputItems = outputs.ToArray();
 
-            Log.LogMessage($"ExpressionGenerationTask: finished generating\r\n\toutput {outputs.Count}  *{ExpressionsExtensionPrefix}.cs files\r\n\tfrom {InputItems.Length} input *.cs files");
             return true;
         }
 

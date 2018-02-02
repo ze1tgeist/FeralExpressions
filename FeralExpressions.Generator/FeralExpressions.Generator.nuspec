@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>FeralExpressions.Generator</id>
-		<version>1.1.1-alpha</version>
+		<version>1.2.0-alpha</version>
 		<title>FeralExpressions.Generator</title>
 		<authors>ruben morton</authors>
 		<owners>ruben morton</owners>
@@ -27,6 +27,7 @@ public static Expression&lt;Func&lt;string,string&gt;&gt; Test_Expression => (st
 	</metadata>
 	<files>
 		<file src="bin\Release\*.dll" target="tools" />
+		<file src="bin\Release\*.exe" target="tools" />
 		<file src="FeralExpressions.Generator.targets" target="build" />
 	</files>
 </package>
