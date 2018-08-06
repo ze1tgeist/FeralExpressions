@@ -7,7 +7,7 @@ using System.IO;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Linq;
 
-namespace FeralExpressions.Generator.Tests
+namespace FeralExpressionsCore.Generator.Tests
 {
     /// <summary>
     /// Summary description for MethodToExpressionRewriterTests

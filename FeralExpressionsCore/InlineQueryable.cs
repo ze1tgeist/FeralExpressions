@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FeralExpressionsCore
 {
-    class InlineQueryable<T> : IQueryable<T>
+    class InlineQueryable<T> : IOrderedQueryable<T>
     {
         public InlineQueryable(IQueryable<T> inner)
         {

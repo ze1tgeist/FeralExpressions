@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeralExpressions.Generator
+namespace FeralExpressionsCore.Generator
 {
     public class MethodToExpressionConverter
     {
@@ -96,7 +96,9 @@ namespace FeralExpressions.Generator
                 .Select(p => RemoveThis(p));
 
             return
-                SyntaxFactory.SeparatedList<ParameterSyntax>(parameters, Enumerable.Repeat(SyntaxFactory.Token(SyntaxKind.CommaToken).WithTrailingTrivia(SyntaxFactory.Space), parameters.Count() - 1));
+                parameters.Count() > 0
+                ? SyntaxFactory.SeparatedList<ParameterSyntax>(parameters, Enumerable.Repeat(SyntaxFactory.Token(SyntaxKind.CommaToken).WithTrailingTrivia(SyntaxFactory.Space), parameters.Count() - 1))
+                : SyntaxFactory.SeparatedList<ParameterSyntax>();
         }
 
         private ParameterSyntax RemoveThis(ParameterSyntax parameter)

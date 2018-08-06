@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace FeralExpressions.Generator
+namespace FeralExpressionsCore.Generator
 {
     class ThisOrImplicitThisTo_ThisRewriter : CSharpSyntaxRewriter
     {

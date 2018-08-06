@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeralExpressions.Generator.Tests
+namespace FeralExpressionsCore.Generator.Tests
 {
     [TestClass]
     public class ExpressionsPartialClassGeneratorTests

@@ -1,12 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <Configurations>Debug;Release;Release_netcore20</Configurations>
+    <Version>1.3.0-alpha</Version>
+    <Authors>ruben morton</Authors>
+    <Company />
+    <Product />
+    <Description>FeralExpressionsCore defines the expansion method .Inline() which can be called on either an expression,
+or an IQueryable. It replaces method calls in the expression with the method body.
+In order for this to work, the method must 
+(a) be declared in a partial class 
+(b) have an expression body 
+(c) have any references to this explicitly written</Description>
+    <Copyright>Copyright 2018</Copyright>
+    <PackageReleaseNotes>- Removed dependencies on Microsoft Build framework from the Generator, as it was causing problems with core.  Just run it as an exe.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
+    <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <ProjectReference Include="..\FeralExpressionsCore.Generator\FeralExpressionsCore.Generator.csproj">
+		  <PrivateAssets>None</PrivateAssets>
+	  </ProjectReference>
   </ItemGroup>
 
 </Project>
