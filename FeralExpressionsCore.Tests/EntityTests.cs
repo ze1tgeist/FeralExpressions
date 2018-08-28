@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Xunit;
 
 namespace FeralExpressionsCore.Tests
@@ -34,6 +35,32 @@ namespace FeralExpressionsCore.Tests
 
             var actual = repo.EntitiesStartingWithQAndEndingWithP.ToArray();
             Assert.True(actual.Count() == 2);
+
+        }
+
+        [Fact]
+        public void Interface_Realization_Works_For_EF()
+        {
+            var entities = new List<TestEntity>()
+            {
+                new TestEntity() { Key = "first second", Data = "def" },
+                new TestEntity() { Key = "QueenP", Data = "def" },
+            };
+
+            var insertContext = new TestDbContext();
+            insertContext.Database.EnsureDeleted();
+            insertContext.Database.EnsureCreated();
+
+            insertContext.Entities.AddRange(entities);
+            insertContext.SaveChanges();
+
+            var readContext = new TestDbContext();
+            IEntityRepository repo = new EntityRepository(readContext);
+
+            IInterfaceWithFunction impl = new ImplementationOfInterfaceWithFunction("first");
+
+            var actual = repo.Entities.Where(e => e.Key == impl.Function("second")).ToArray();
+            Assert.True(actual.Count() == 1);
 
         }
 

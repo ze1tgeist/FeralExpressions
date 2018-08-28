@@ -13,6 +13,7 @@ namespace FeralExpressionsCore
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
+            node = RealizeInterfaceConstant(node);
             var expr = GetExpressionEquivalent(node.Method);
             if (expr != null)
             {
@@ -22,6 +23,38 @@ namespace FeralExpressionsCore
             {
                 return base.VisitMethodCall(node);
             }
+        }
+
+        private MethodCallExpression RealizeInterfaceConstant(MethodCallExpression node)
+        {
+            var obj = node.Object;
+            var method = node.Method;
+            var args = node.Arguments;
+            MethodCallExpression realizedNode = null;
+            if (method.DeclaringType.IsInterface)
+            {
+                if (obj is ConstantExpression constExpr)
+                {
+                    obj = Expression.Constant(constExpr.Value, constExpr.Value.GetType());
+                    var map = constExpr.Value.GetType().GetInterfaceMap(method.DeclaringType);
+                    method = map.TargetMethods[Array.IndexOf(map.InterfaceMethods, method)];
+
+                    realizedNode = Expression.Call(obj, method, args);
+                }
+                else if (obj is MemberExpression membExpr && membExpr.Expression is ConstantExpression constObjExpr && membExpr.Member is FieldInfo field)
+                {
+                    var val = field.GetValue(constObjExpr.Value);
+                    var map = val.GetType().GetInterfaceMap(method.DeclaringType);
+                    method = map.TargetMethods[Array.IndexOf(map.InterfaceMethods, method)];
+
+                    var castExpr = Expression.TypeAs(obj, val.GetType());
+                    realizedNode = Expression.Call(castExpr, method, args);
+
+
+                }
+            }
+            return realizedNode ?? node;
+
         }
 
         private LambdaExpression GetExpressionEquivalent(MethodInfo method)

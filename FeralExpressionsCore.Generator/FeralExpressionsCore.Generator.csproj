@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <StartupObject>FeralExpressionsCore.Generator.Program</StartupObject>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>1.3.0-alpha</Version>
+    <Version>1.4.0-alpha</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -21,7 +21,7 @@ would produce
 public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_Expression =&gt; (string arg1) =&gt; ""abc"" + arg1;</Description>
     <Copyright>Copyright 2018</Copyright>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
-    <PackageReleaseNotes>- Rewrote the generator in .NET core. Later Versions of Microsoft.CodeAnalysis only support core, so this seemed easier.  Passes the same tests as the old generator.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Implemented Realization of interfaces methods, for objects bound to local variables.</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
   </PropertyGroup>
 
@@ -32,13 +32,15 @@ public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_E
 	  </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.8.2" />
+	  <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.8.2">
+		  <PrivateAssets>all</PrivateAssets>
+	  </PackageReference>
   </ItemGroup>
 
 	<Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
 
 		<ItemGroup>
-			<_PackageFiles Include="bin\$(Configuration)\netcoreapp2.1\*.dll" Exclude="bin\$(Configuration)\netcoreapp2.1\FeralExpressionsCore*.dll">
+			<_PackageFiles Include="bin\$(Configuration)\netcoreapp2.0\*.dll" Exclude="bin\$(Configuration)\netcoreapp2.0\FeralExpressionsCore*.dll">
 				<PackagePath>tools</PackagePath>
 				<Visible>false</Visible>
 				<BuildAction>Content</BuildAction>

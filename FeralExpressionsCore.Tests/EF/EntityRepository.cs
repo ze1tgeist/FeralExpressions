@@ -18,7 +18,7 @@ namespace FeralExpressionsCore.Tests.EF
             .MapTypes(mappings)
             .GetEntitiesStartingWithQAndEndingWithP();
 
-
+        public IQueryable<IEntity> Entities => dbContext.Entities;
 
         private readonly TestDbContext dbContext;
         private static Dictionary<Type, Type> mappings = new Dictionary<Type, Type>()

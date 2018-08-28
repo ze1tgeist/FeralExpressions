@@ -19,14 +19,16 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\FeralExpressionsCore\FeralExpressionsCore.csproj" />
 	</ItemGroup>
-	<UsingTask AssemblyFile="C:\Projects\FeralExpressions\FeralExpressions.Generator\bin\Debug\FeralExpressions.Generator.dll" TaskName="FeralExpressions.Generator.ExpressionGenerationTask" />
-	<Target Name="Test" BeforeTargets="Build">
-		<ExpressionGenerationTask InputItems="@(Compile)">
-			<Output TaskParameter="OutputItems" ItemName="ExpressionsCompile" />
-		</ExpressionGenerationTask>
+	<Target Name="Generate" BeforeTargets="Build">
+		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\FeralExpressionsCore.Generator\bin\Release\netcoreapp2.1\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; @(Compile->'&quot;%(FullPath)&quot;', ' ')" ConsoleToMSBuild="true" >
+			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
+		</Exec>
+		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="high" />
+		<Message Text="@(ExpressionsCompile)" Importance="high" />
 		<ItemGroup>
 			<Compile Include="@(ExpressionsCompile)" Exclude="@(Compile)" />
 		</ItemGroup>
 	</Target>
+
 
 </Project>
