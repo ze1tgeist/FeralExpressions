@@ -22,9 +22,9 @@ namespace FeralExpressionsCore
 
         public IQueryProvider Provider => provider;
 
-        public IEnumerator<T> GetEnumerator() => inner.GetEnumerator();
+        public IEnumerator<T> GetEnumerator() => Provider.Execute<IEnumerable<T>>(inner.Expression).GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator() => inner.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         internal IQueryable<T> Inner => inner;
 

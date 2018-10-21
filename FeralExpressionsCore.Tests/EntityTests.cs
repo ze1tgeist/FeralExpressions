@@ -94,6 +94,34 @@ namespace FeralExpressionsCore.Tests
         }
 
         [Fact]
+        public void Cast_Mapping_Works()
+        {
+            Expression<Func<IQueryable<IEntity>, IQueryable<IEntity>>> unmappedExpression = (IQueryable<IEntity> queryable) => queryable.Include(e => ((ISubEntity)e).Children);
+
+            Expression<Func<IQueryable<IEntity>, IQueryable<IEntity>>> expectedExpression = (IQueryable<IEntity> queryable) => queryable.Include(e => ((SubEntity)e).Children);
+
+            var actualExpression = unmappedExpression.MapTypes(new Dictionary<Type, Type> { { typeof(ISubEntity), typeof(SubEntity) } });
+
+            var expectedString = expectedExpression.ToString();
+            var actualString = actualExpression.ToString();
+            Assert.Equal(expectedString, actualString);
+        }
+
+        [Fact]
+        public void IsA_Mapping_Works()
+        {
+            Expression<Func<IQueryable<IEntity>, IQueryable<IEntity>>> unmappedExpression = (IQueryable<IEntity> queryable) => queryable.Where(e => e is ISubEntity);
+
+            Expression<Func<IQueryable<IEntity>, IQueryable<IEntity>>> expectedExpression = (IQueryable<IEntity> queryable) => queryable.Where(e => e is SubEntity);
+
+            var actualExpression = unmappedExpression.MapTypes(new Dictionary<Type, Type> { { typeof(ISubEntity), typeof(SubEntity) } });
+
+            var expectedString = expectedExpression.ToString();
+            var actualString = actualExpression.ToString();
+            Assert.Equal(expectedString, actualString);
+        }
+
+        [Fact]
         public void Include_Works()
         {
             var entities = new List<TestEntity>()

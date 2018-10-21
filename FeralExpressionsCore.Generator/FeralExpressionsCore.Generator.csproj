@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>1.4.0-alpha</Version>
+    <Version>1.5.0</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -21,7 +21,7 @@ would produce
 public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_Expression =&gt; (string arg1) =&gt; ""abc"" + arg1;</Description>
     <Copyright>Copyright 2018</Copyright>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
-    <PackageReleaseNotes>- Implemented Realization of interfaces methods, for objects bound to local variables.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Added support for casts as the is operator which are supported in EF from version 2.1</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
   </PropertyGroup>
 

@@ -35,7 +35,8 @@ namespace FeralExpressionsCore
 
         public override TResult Execute<TResult>(Expression expression)
         {
-            return queryable.Inner.Provider.Execute<TResult>(expression.MapTypes(mappings));
+            var mappedExpression = expression.MapTypes(mappings);
+            return queryable.Inner.Provider.Execute<TResult>(mappedExpression);
         }
 
         public override IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
