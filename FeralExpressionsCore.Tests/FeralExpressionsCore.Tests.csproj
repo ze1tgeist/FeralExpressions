@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netcoreapp2.0</TargetFramework>
@@ -20,7 +20,7 @@
 	  <ProjectReference Include="..\FeralExpressionsCore\FeralExpressionsCore.csproj" />
 	</ItemGroup>
 	<Target Name="Generate" BeforeTargets="Build">
-		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\FeralExpressionsCore.Generator\bin\Release\netcoreapp2.1\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; @(Compile->'&quot;%(FullPath)&quot;', ' ')" ConsoleToMSBuild="true" >
+		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\FeralExpressionsCore.Generator\bin\$(Configuration)\$(TargetFramework)\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; @(Compile->'&quot;%(FullPath)&quot;', ' ')" ConsoleToMSBuild="true" >
 			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
 		</Exec>
 		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="high" />
