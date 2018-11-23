@@ -13,4 +13,14 @@ namespace FeralExpressionsCore.Tests
         }
         public string Function(string arg) => this.para + " " + arg;
     }
+
+    partial class RecursiveImplementationOfInterfaceWithFunction : IInterfaceWithFunction
+    {
+        public IInterfaceWithFunction inner;
+        public RecursiveImplementationOfInterfaceWithFunction(IInterfaceWithFunction inner)
+        {
+            this.inner = inner;
+        }
+        public string Function(string arg) => this.inner.Function(arg);
+    }
 }

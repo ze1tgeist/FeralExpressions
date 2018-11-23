@@ -15,8 +15,39 @@ namespace FeralExpressionsCore.Tests
 
             Expression<Func<string>> exBasedOnInterface = () => impl.Function("abc");
 
+            InlineAndCheckExpression(exBasedOnInterface);
+        }
+
+        [Fact]
+        public void RecursiveOnceInterfaceConstantsAreRealizedCorrectly()
+        {
+            IInterfaceWithFunction impl = 
+                new RecursiveImplementationOfInterfaceWithFunction(
+                    new ImplementationOfInterfaceWithFunction("def"));
+
+            Expression<Func<string>> exBasedOnInterface = () => impl.Function("abc");
+
             var actualInlinedExpression = exBasedOnInterface.Inline();
 
+        }
+
+        [Fact]
+        public void RecursiveTwiceInterfaceConstantsAreRealizedCorrectly()
+        {
+            IInterfaceWithFunction impl = 
+                new RecursiveImplementationOfInterfaceWithFunction(
+                    new RecursiveImplementationOfInterfaceWithFunction(
+                        new ImplementationOfInterfaceWithFunction("def")));
+
+            Expression<Func<string>> exBasedOnInterface = () => impl.Function("abc");
+
+            var actualInlinedExpression = exBasedOnInterface.Inline();
+
+        }
+
+        private void InlineAndCheckExpression(Expression expression)
+        {
+            Expression actualInlinedExpression = expression.Inline();
             var lambda = actualInlinedExpression as LambdaExpression;
             Assert.NotNull(lambda);
             var body = lambda.Body as BinaryExpression;
@@ -35,6 +66,7 @@ namespace FeralExpressionsCore.Tests
             var field = left.Left as MemberExpression;
             Assert.NotNull(field);
             Assert.Equal("para", field.Member.Name);
+
         }
     }
 }

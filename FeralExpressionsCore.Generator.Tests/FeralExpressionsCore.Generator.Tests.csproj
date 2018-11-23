@@ -21,6 +21,9 @@
     <Compile Update="ExtensionMethods.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="GenericClass.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Update="OuterNonPartialClass.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

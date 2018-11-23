@@ -26,7 +26,7 @@ namespace FeralExpressionsCore.Generator
                     (
                         methodIsStatic
                             ? new TypeSyntax[] { }
-                            : Enumerable.Repeat(SyntaxFactory.ParseTypeName(parentClass.Identifier.Text), 1)
+                            : Enumerable.Repeat(GetTypeOfClass(parentClass), 1)
                          
                     ).Union(
                         method.ParameterList.Parameters.AsEnumerable()
@@ -87,6 +87,18 @@ namespace FeralExpressionsCore.Generator
 
         }
 
+        private TypeSyntax GetTypeOfClass(ClassDeclarationSyntax classDeclaration)
+        {
+            if (classDeclaration.TypeParameterList != null && classDeclaration.TypeParameterList.Parameters.Any())
+            {
+                var typesForArguments = classDeclaration.TypeParameterList.Parameters.Select(ps => SyntaxFactory.ParseTypeName(ps.Identifier.Text));
+                var seperatedArguments = SyntaxFactory.SeparatedList<TypeSyntax>(typesForArguments);
+                var argumentList = SyntaxFactory.TypeArgumentList(seperatedArguments);
+                return SyntaxFactory.GenericName(classDeclaration.Identifier, argumentList);
+            }
+            else
+                return SyntaxFactory.ParseTypeName(classDeclaration.Identifier.Text);
+        }
         private SeparatedSyntaxList<ParameterSyntax> RemoveThisFromExtensionMethod(MethodDeclarationSyntax method)
         {
             var parameters =
@@ -114,7 +126,7 @@ namespace FeralExpressionsCore.Generator
             var parameters = Enumerable.Repeat(SyntaxFactory.Parameter(
                         SyntaxFactory.List<AttributeListSyntax>(),
                         SyntaxFactory.TokenList(),
-                        SyntaxFactory.ParseTypeName(parentClass.Identifier.Text).WithTrailingTrivia(SyntaxFactory.Space),
+                        GetTypeOfClass(parentClass).WithTrailingTrivia(SyntaxFactory.Space),
                         SyntaxFactory.Identifier("_this"),
                         null
                     ), 1).Union(method.ParameterList.Parameters);

@@ -41,6 +41,21 @@ namespace FeralExpressionsCore.Generator.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void ExpressionPartialClassGenerator_converts_GenericClass()
+        {
+            var sut = new ExpressionsPartialClassGenerator(new MethodToExpressionConverter(), ".expressions");
+
+            var root = ReadRoot(@"GenericClass.cs");
+
+            var actual = sut.Generate(root)?.ToFullString();
+
+            string expected = "using System;\r\nusing System.Collections.Generic;\r\nusing System.Text;\r\nusing System.Linq.Expressions;\r\n\r\nnamespace FeralExpressionsCore.Generator.Tests\r\n{\r\n    public partial class GenericClassWithConstraints<T1, T2> where T1 : class\r\n    {\r\n        public static Expression<Func<GenericClassWithConstraints<T1,T2>,T1,T1>> NoChange_Expression =>\r\n        (GenericClassWithConstraints<T1,T2> _this, T1 arg) => arg;\r\n    }\r\n}\r\n";
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
         private CompilationUnitSyntax ReadRoot(string path)
         {
             var code = ReadFile(path);
