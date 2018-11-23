@@ -57,6 +57,32 @@ namespace FeralExpressionsCore
 
         }
 
+        private bool CanGetValue(Expression objExpr, out object value, out Expression castExpression)
+        {
+            if (objExpr is ConstantExpression constExpr)
+            {
+                value = constExpr.Value;
+                castExpression = objExpr;
+                return true;
+            }
+            else if (objExpr is UnaryExpression unaryExpr && unaryExpr.NodeType == ExpressionType.TypeAs)
+            {
+                return CanGetValue(unaryExpr.Operand, out value, out castExpression);
+            }
+            else if (objExpr is MemberExpression membExpr && membExpr.Member is FieldInfo field)
+            {
+                if (CanGetValue(membExpr.Expression, out var parent, out var uncastExpression))
+                {
+                    value = field.GetValue(parent);
+                    castExpression = Expression.TypeAs(uncastExpression, value.GetType());
+                    return true;
+                }
+            }
+            value = null;
+            castExpression = null;
+            return false;
+        }
+
         private LambdaExpression GetExpressionEquivalent(MethodInfo method)
         {
             var bindingFlags = BindingFlags.Static
