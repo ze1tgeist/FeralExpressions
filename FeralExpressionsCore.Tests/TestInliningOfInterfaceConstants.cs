@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FeralExpressionsCore.ReproduceRecursionBug;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -67,6 +68,30 @@ namespace FeralExpressionsCore.Tests
             Assert.NotNull(field);
             Assert.Equal("para", field.Member.Name);
 
+        }
+
+        [Fact]
+        public void RealizationOfInterfacesCopesWithMoreComplexModels()
+        {
+            ReproduceRecursionBug.IConverter<ReproduceRecursionBug.Models.Legislation, ReproduceRecursionBug.Dtos.Legislation> converter =
+                new LegislationModelToDtoConverter();
+            ReproduceRecursionBug.IDomainToDtoMapper<ReproduceRecursionBug.Models.Legislation, ReproduceRecursionBug.Dtos.Legislation> mapper =
+                new IndependentSolutionDomainToDtoMapper<ReproduceRecursionBug.Models.Legislation, ReproduceRecursionBug.Dtos.Legislation>(converter);
+
+
+            Expression<Func<ReproduceRecursionBug.Models.Legislation, ReproduceRecursionBug.Dtos.Legislation>> expr = l => mapper.DomainEntityToDto(l);
+
+            var inlinedExpression = expr.Inline();
+
+            var lambdaExpression = inlinedExpression as LambdaExpression;
+            Assert.NotNull(lambdaExpression);
+
+            var body = lambdaExpression.Body;
+
+            var methodCall = body as MethodCallExpression;
+
+            // it is supposed to have replaced the method Convert with an expression.  Check that methodCall is null shows this.
+            Assert.Null(methodCall);
         }
     }
 }

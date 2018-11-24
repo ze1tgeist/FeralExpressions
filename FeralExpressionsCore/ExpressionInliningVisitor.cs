@@ -33,24 +33,11 @@ namespace FeralExpressionsCore
             MethodCallExpression realizedNode = null;
             if (method.DeclaringType.IsInterface)
             {
-                if (obj is ConstantExpression constExpr)
+                if (CanGetValue(obj, out var val, out var castExpression))
                 {
-                    obj = Expression.Constant(constExpr.Value, constExpr.Value.GetType());
-                    var map = constExpr.Value.GetType().GetInterfaceMap(method.DeclaringType);
-                    method = map.TargetMethods[Array.IndexOf(map.InterfaceMethods, method)];
-
-                    realizedNode = Expression.Call(obj, method, args);
-                }
-                else if (obj is MemberExpression membExpr && membExpr.Expression is ConstantExpression constObjExpr && membExpr.Member is FieldInfo field)
-                {
-                    var val = field.GetValue(constObjExpr.Value);
                     var map = val.GetType().GetInterfaceMap(method.DeclaringType);
                     method = map.TargetMethods[Array.IndexOf(map.InterfaceMethods, method)];
-
-                    var castExpr = Expression.TypeAs(obj, val.GetType());
-                    realizedNode = Expression.Call(castExpr, method, args);
-
-
+                    realizedNode = Expression.Call(castExpression, method, args);
                 }
             }
             return realizedNode ?? node;
@@ -74,7 +61,8 @@ namespace FeralExpressionsCore
                 if (CanGetValue(membExpr.Expression, out var parent, out var uncastExpression))
                 {
                     value = field.GetValue(parent);
-                    castExpression = Expression.TypeAs(uncastExpression, value.GetType());
+                    var fieldExpr = Expression.Field(uncastExpression, field);
+                    castExpression = Expression.TypeAs(fieldExpr, value.GetType());
                     return true;
                 }
             }
