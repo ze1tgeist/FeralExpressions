@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <Configurations>Debug;Release;Release_netcore20</Configurations>
-    <Version>1.5.1</Version>
+    <Version>1.6.0</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -14,7 +14,7 @@ In order for this to work, the method must
 (b) have an expression body 
 (c) have any references to this explicitly written</Description>
     <Copyright>Copyright 2018</Copyright>
-    <PackageReleaseNotes>- fixed a bug in the generator where generic parameters were not correctly added to expressions</PackageReleaseNotes>
+    <PackageReleaseNotes>- Implemented Recursive Realization of Interfaces</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
