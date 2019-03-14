@@ -7,5 +7,7 @@ namespace FeralExpressionsCore.Generator.Tests
     public partial class SubClass : BaseClass
     {
         public override int VirtualMethodInBaseClass() => 1;
+
+        public new int NonVirtualMethodInBaseClass() => 2;
     }
 }

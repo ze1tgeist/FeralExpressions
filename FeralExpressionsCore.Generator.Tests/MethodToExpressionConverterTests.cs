@@ -125,6 +125,39 @@ namespace FeralExpressionsCore.Generator.Tests
                 );
         }
 
+        [TestMethod]
+        public void MethodToExpressionConverter_removes_virtual()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"BaseClass.cs",
+                    methodName: "VirtualMethodInBaseClass",
+                    expectedExpressionText: "        public static Expression<Func<BaseClass,int>> VirtualMethodInBaseClass_Expression =>\r\n        (BaseClass _this) => 0;\r\n"
+                );
+        }
+
+        [TestMethod]
+        public void MethodToExpressionConverter_removes_override()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"SubClass.cs",
+                    methodName: "VirtualMethodInBaseClass",
+                    expectedExpressionText: "        public static Expression<Func<SubClass,int>> VirtualMethodInBaseClass_Expression =>\r\n        (SubClass _this) => 1;\r\n"
+                );
+        }
+
+        [TestMethod]
+        public void MethodToExpressionConverter_removes_new_from_shadowing_method()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"SubClass.cs",
+                    methodName: "NonVirtualMethodInBaseClass",
+                    expectedExpressionText: "        public static Expression<Func<SubClass,int>> NonVirtualMethodInBaseClass_Expression =>\r\n        (SubClass _this) => 2;\r\n"
+                );
+        }
+
 
         private void TestMethodToExpression(string codeFilePath, string methodName, string expectedExpressionText)
         {
