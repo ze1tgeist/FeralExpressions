@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>1.6.0</Version>
+    <Version>1.6.1</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -21,7 +21,7 @@ would produce
 public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_Expression =&gt; (string arg1) =&gt; ""abc"" + arg1;</Description>
     <Copyright>Copyright 2018</Copyright>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
-    <PackageReleaseNotes>- Implemented Recursive Realization of Interfaces</PackageReleaseNotes>
+    <PackageReleaseNotes>fixed a bug where the generator was not handing virtual/new/override modifiers on a method.</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
   </PropertyGroup>
 

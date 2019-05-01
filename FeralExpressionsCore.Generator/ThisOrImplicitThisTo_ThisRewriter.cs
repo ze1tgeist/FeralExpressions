@@ -49,6 +49,15 @@ namespace FeralExpressionsCore.Generator
             return SyntaxFactory.IdentifierName("_this");
         }
 
+        public override SyntaxNode VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+            if (node.OperatorToken.Kind() == SyntaxKind.IsKeyword)
+            {
+                node = node.WithOperatorToken(node.OperatorToken.WithLeadingTrivia(SyntaxFactory.Space));
+            }
+            return base.VisitBinaryExpression(node);
+        }
+
         private SemanticModel semanticModel;
         private ISymbol methodBeingParsedSymbol;
     }

@@ -63,7 +63,10 @@ namespace FeralExpressionsCore.Generator
                         SyntaxFactory.Token(SyntaxKind.EqualsGreaterThanToken), 
                         lamdaExpression
                     );
-                var modifiers = method.Modifiers;
+                var kindsToRemove = new SyntaxKind[] { SyntaxKind.VirtualKeyword, SyntaxKind.NewKeyword, SyntaxKind.OverrideKeyword };
+                var modifiers = 
+                    SyntaxFactory.TokenList(method.Modifiers.Where(t => !kindsToRemove.Contains(t.Kind()))) ;
+               
                 if (!modifiers.Any(SyntaxKind.StaticKeyword))
                 {
                     modifiers = SyntaxFactory.TokenList(modifiers.Union(Enumerable.Repeat(SyntaxFactory.Token(SyntaxKind.StaticKeyword).WithTrailingTrivia(SyntaxFactory.Space), 1)));
