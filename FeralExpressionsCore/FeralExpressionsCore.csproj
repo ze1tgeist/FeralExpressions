@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <Configurations>Debug;Release;Release_netcore20</Configurations>
-    <Version>1.6.1</Version>
+    <Version>1.6.2</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -14,7 +14,7 @@ In order for this to work, the method must
 (b) have an expression body 
 (c) have any references to this explicitly written</Description>
     <Copyright>Copyright 2018</Copyright>
-    <PackageReleaseNotes>fixed a bug where the generator was not handing virtual/new/override modifiers on a method.</PackageReleaseNotes>
+    <PackageReleaseNotes>fixed a bug where this is ClassName was being converted to _thisis ClassName</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
