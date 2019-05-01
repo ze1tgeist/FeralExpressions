@@ -46,7 +46,7 @@ namespace FeralExpressionsCore.Generator.Tests
                     methodName: "PrivateMethodInOuterPartial",
                     expectedExpressionText: "        private static Expression<Func<OuterPartialClass,string>> PrivateMethodInOuterPartial_Expression =>\r\n        (OuterPartialClass _this) => \"abc\";\r\n"
                 );
-        } 
+        }
 
         [TestMethod]
         public void MethodToExpressionConverter_converts_expression_bodied_method_in_outer_partial_class_with_interesting_args_to_expression()
@@ -157,6 +157,18 @@ namespace FeralExpressionsCore.Generator.Tests
                     expectedExpressionText: "        public static Expression<Func<SubClass,int>> NonVirtualMethodInBaseClass_Expression =>\r\n        (SubClass _this) => 2;\r\n"
                 );
         }
+
+        [TestMethod]
+        public void MethodToExpressionConverter_adds_a_space_between_this_and_the_is_operator()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ThisIsTestClass.cs",
+                    methodName: "MethodWithThisIs",
+                    expectedExpressionText: "        public static Expression<Func<ThisIsTestClass,bool>> MethodWithThisIs_Expression =>\r\n        (ThisIsTestClass _this) => _this is ThisIsTestClass;\r\n"
+                );
+        }
+
 
 
         private void TestMethodToExpression(string codeFilePath, string methodName, string expectedExpressionText)
