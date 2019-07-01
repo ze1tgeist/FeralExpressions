@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>1.6.2</Version>
+    <Version>3.0.0-preview</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -21,7 +21,7 @@ would produce
 public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_Expression =&gt; (string arg1) =&gt; ""abc"" + arg1;</Description>
     <Copyright>Copyright 2018</Copyright>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
-    <PackageReleaseNotes>fixed a bug where this is ClassName was being converted to _thisis ClassName</PackageReleaseNotes>
+    <PackageReleaseNotes>supports efcore 3.x preview (not backward compatible. Do not use with Efcore 2.x)</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
   </PropertyGroup>
 

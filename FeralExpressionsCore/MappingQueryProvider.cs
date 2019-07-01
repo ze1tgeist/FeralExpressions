@@ -39,7 +39,7 @@ namespace FeralExpressionsCore
             return queryable.Inner.Provider.Execute<TResult>(mappedExpression);
         }
 
-        public override IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
+        public override TResult ExecuteAsync<TResult>(Expression expression)
         {
             throw new NotImplementedException();
         }
@@ -52,6 +52,16 @@ namespace FeralExpressionsCore
         private class DummyQueryCompiler : IQueryCompiler
         {
             public Func<QueryContext, IAsyncEnumerable<TResult>> CreateCompiledAsyncEnumerableQuery<TResult>(Expression query)
+            {
+                throw new NotImplementedException();
+            }
+
+            public Func<QueryContext, TResult> CreateCompiledAsyncQuery<TResult>(Expression query)
+            {
+                throw new NotImplementedException();
+            }
+
+            public Func<QueryContext, Task<TResult>> CreateCompiledAsyncSingletonQuery<TResult>(Expression query)
             {
                 throw new NotImplementedException();
             }
@@ -71,7 +81,7 @@ namespace FeralExpressionsCore
                 throw new NotImplementedException();
             }
 
-            public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression query)
+            public TResult ExecuteAsync<TResult>(Expression query)
             {
                 throw new NotImplementedException();
             }

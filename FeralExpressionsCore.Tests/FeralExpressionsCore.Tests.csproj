@@ -7,9 +7,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview5.19227.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.0-preview5.19227.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview5.19227.1" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0-preview-20180109-01" />
 		<PackageReference Include="xunit" Version="2.3.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
@@ -20,7 +20,7 @@
 	  <ProjectReference Include="..\FeralExpressionsCore\FeralExpressionsCore.csproj" />
 	</ItemGroup>
 	<Target Name="Generate" BeforeTargets="Build">
-		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\FeralExpressionsCore.Generator\bin\$(Configuration)\$(TargetFramework)\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; @(Compile->'&quot;%(FullPath)&quot;', ' ')" ConsoleToMSBuild="true" >
+		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\FeralExpressionsCore.Generator\bin\$(Configuration)\$(TargetFramework)\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; @(Compile->'&quot;%(FullPath)&quot;', ' ')" ConsoleToMSBuild="true">
 			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
 		</Exec>
 		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="high" />
