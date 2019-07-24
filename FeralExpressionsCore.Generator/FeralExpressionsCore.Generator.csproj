@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>1.7.0</Version>
+    <Version>1.8.9</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -21,7 +21,7 @@ would produce
 public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_Expression =&gt; (string arg1) =&gt; ""abc"" + arg1;</Description>
     <Copyright>Copyright 2018</Copyright>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
-    <PackageReleaseNotes>implemented Type Mapping for Enumerable.Empty</PackageReleaseNotes>
+    <PackageReleaseNotes>Added the -f option to the generator, to allow one file with all input files listed in it.  Works around an issue where CMD only allows 8192 characters max for arguments.</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
   </PropertyGroup>
 

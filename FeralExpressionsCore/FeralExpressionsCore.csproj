@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <Configurations>Debug;Release;Release_netcore20</Configurations>
-    <Version>1.7.0</Version>
+    <Version>1.8.9</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -14,7 +14,7 @@ In order for this to work, the method must
 (b) have an expression body 
 (c) have any references to this explicitly written</Description>
     <Copyright>Copyright 2018</Copyright>
-    <PackageReleaseNotes>implemented Type Mapping for Enumerable.Empty</PackageReleaseNotes>
+    <PackageReleaseNotes>Added the -f option to the generator, to allow one file with all input files listed in it.  Works around an issue where CMD only allows 8192 characters max for arguments.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
