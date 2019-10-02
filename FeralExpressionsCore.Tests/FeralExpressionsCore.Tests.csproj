@@ -19,16 +19,20 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\FeralExpressionsCore\FeralExpressionsCore.csproj" />
 	</ItemGroup>
-	<Target Name="Generate" BeforeTargets="Build">
-		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\FeralExpressionsCore.Generator\bin\$(Configuration)\$(TargetFramework)\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; @(Compile->'&quot;%(FullPath)&quot;', ' ')" ConsoleToMSBuild="true">
+	<Target Name="GenerateFeralExpressions" BeforeTargets="Build">
+		<ItemGroup>
+			<FeralExpressions_AllCompileItemsFile Include="$(MSBuildThisFileDirectory)\obj\$([System.Guid]::NewGuid()).txt" />
+		</ItemGroup>
+		<WriteLinesToFile File="@(FeralExpressions_AllCompileItemsFile)" Lines="@(Compile->'%(FullPath)', '&#13;&#10;')" Overwrite="true" Encoding="Unicode" />
+		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\FeralExpressionsCore.Generator\bin\$(Configuration)\$(TargetFramework)\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; -f &quot;@(FeralExpressions_AllCompileItemsFile)&quot;" ConsoleToMSBuild="true" >
 			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
 		</Exec>
+		<Delete Files="@(FeralExpressions_AllCompileItemsFile)" />
 		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="high" />
 		<Message Text="@(ExpressionsCompile)" Importance="high" />
 		<ItemGroup>
 			<Compile Include="@(ExpressionsCompile)" Exclude="@(Compile)" />
 		</ItemGroup>
 	</Target>
-
 
 </Project>
