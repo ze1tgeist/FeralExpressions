@@ -15,17 +15,18 @@ namespace FeralExpressionsCore
 
             var enumerableType = typeof(Enumerable);
             method_enumerable_OfType = enumerableType.GetMethod("OfType", BindingFlags.Static | BindingFlags.Public);
-
+            method_enumerable_empty = enumerableType.GetMethod("Empty", BindingFlags.Static | BindingFlags.Public);
             var queryableType = typeof(Queryable);
             method_queryable_OfType = queryableType.GetMethod("OfType", BindingFlags.Static | BindingFlags.Public);
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            if(IsMethod_OfType(node))
+            if(IsMethod_OfType(node) || IsMethod_Empty(node))
             {
                 node = MapTypeInMethod(node);
-            }
+            } 
+            
 
             return base.VisitMethodCall(node);
 
@@ -75,9 +76,9 @@ namespace FeralExpressionsCore
 
         private bool IsMethod_OfType(MethodCallExpression node)
         {
-            return 
-                node.Method.IsGenericMethod 
-                && 
+            return
+                node.Method.IsGenericMethod
+                &&
                     (
                         node.Method.GetGenericMethodDefinition() == method_enumerable_OfType
                         || node.Method.GetGenericMethodDefinition() == method_queryable_OfType
@@ -85,8 +86,20 @@ namespace FeralExpressionsCore
 
         }
 
+        private bool IsMethod_Empty(MethodCallExpression node)
+        {
+            return
+                node.Method.IsGenericMethod
+                &&
+                    (
+                        node.Method.GetGenericMethodDefinition() == method_enumerable_empty
+                    );
+
+        }
+
         private readonly MethodInfo method_enumerable_OfType;
         private readonly MethodInfo method_queryable_OfType;
+        private readonly MethodInfo method_enumerable_empty;
         private readonly IDictionary<Type, Type> mappings;
     }
 }
