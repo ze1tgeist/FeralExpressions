@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <Configurations>Debug;Release;Release_netcore20</Configurations>
-    <Version>3.0.1-preview</Version>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Configurations>Debug;Release;Release_netcore30</Configurations>
+    <Version>3.0.1-preview2</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -23,7 +23,8 @@ In order for this to work, the method must
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview5.19227.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
