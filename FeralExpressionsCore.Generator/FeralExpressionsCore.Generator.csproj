@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <StartupObject>FeralExpressionsCore.Generator.Program</StartupObject>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>3.0.1-preview</Version>
+    <Version>3.0.1-preview-debug2</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />

@@ -33,13 +33,9 @@ namespace FeralExpressionsCore
             return base.Execute<TResult>(expr);
         }
 
-        public override TResult ExecuteAsync<TResult>(Expression expression)
-        {
-            var expr = VisitExpression(expression);
-            return base.ExecuteAsync<TResult>(expr);
-        }
 
-        public override Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+
+        public override TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {
             var expr = VisitExpression(expression);
             return base.ExecuteAsync<TResult>(expr, cancellationToken);
@@ -106,7 +102,8 @@ namespace FeralExpressionsCore
                 throw new NotImplementedException();
             }
 
-            public Task<TResult> ExecuteAsync<TResult>(Expression query, CancellationToken cancellationToken)
+
+            TResult IQueryCompiler.ExecuteAsync<TResult>(Expression query, CancellationToken cancellationToken)
             {
                 throw new NotImplementedException();
             }
