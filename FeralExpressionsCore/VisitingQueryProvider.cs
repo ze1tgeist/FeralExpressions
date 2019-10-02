@@ -1,49 +1,72 @@
-﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Query;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FeralExpressionsCore
 {
-    class InlineQueryProvider<T> : EntityQueryProvider, IQueryProvider
+    public class VisitingQueryProvider : EntityQueryProvider
     {
-        public InlineQueryProvider(InlineQueryable<T> queryable) : base(new DummyQueryCompiler())
-        {
-            this.queryable = queryable;
-        }
-        public override IQueryable CreateQuery(Expression expression)
-        {
-            return queryable.Inner.Provider.CreateQuery(expression.Inline());
-        }
+        private readonly IAsyncQueryProvider inner;
+        public IList<ExpressionVisitor> ExpressionVisitors { get; }
 
-        public override IQueryable<TElement> CreateQuery<TElement>(Expression expression)
+        public VisitingQueryProvider(IQueryProvider inner, IEnumerable<ExpressionVisitor> expressionVisitors) : base(GetQueryCompiler(inner))
         {
-            return new InlineQueryable<TElement>(queryable.Inner.Provider.CreateQuery<TElement>(expression.Inline()));
+            this.inner = inner as IAsyncQueryProvider;
+            this.ExpressionVisitors = new List<ExpressionVisitor>(expressionVisitors);
         }
 
         public override object Execute(Expression expression)
         {
-            return queryable.Inner.Provider.Execute(expression.Inline());
+            var expr = VisitExpression(expression);
+            return base.Execute(expr);
         }
 
         public override TResult Execute<TResult>(Expression expression)
         {
-            return queryable.Inner.Provider.Execute<TResult>(expression.Inline());
+            var expr = VisitExpression(expression);
+            return base.Execute<TResult>(expr);
         }
 
         public override TResult ExecuteAsync<TResult>(Expression expression)
         {
-            throw new NotImplementedException();
+            var expr = VisitExpression(expression);
+            return base.ExecuteAsync<TResult>(expr);
         }
 
         public override Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var expr = VisitExpression(expression);
+            return base.ExecuteAsync<TResult>(expr, cancellationToken);
+        }
+
+        private Expression VisitExpression(Expression expression)
+        {
+            var expr = expression;
+            foreach(var visitor in ExpressionVisitors)
+            {
+                expr = visitor.Visit(expr);
+            }
+
+            return expr;
+        }
+
+        private static IQueryCompiler GetQueryCompiler(IQueryProvider inner)
+        {
+            if (inner is EntityQueryProvider entityQueryProvider)
+            {
+                var queryCompilerField = typeof(EntityQueryProvider).GetField("_queryCompiler", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                var compiler = queryCompilerField.GetValue(entityQueryProvider) as IQueryCompiler;
+
+                return compiler;
+            }
+            else
+                return new DummyQueryCompiler();
         }
 
         private class DummyQueryCompiler : IQueryCompiler
@@ -89,6 +112,5 @@ namespace FeralExpressionsCore
             }
         }
 
-        private InlineQueryable<T> queryable;
     }
 }

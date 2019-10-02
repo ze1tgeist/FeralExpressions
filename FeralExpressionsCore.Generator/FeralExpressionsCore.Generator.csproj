@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>3.0.0-preview</Version>
+    <Version>3.0.1-preview</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -21,7 +21,9 @@ would produce
 public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_Expression =&gt; (string arg1) =&gt; ""abc"" + arg1;</Description>
     <Copyright>Copyright 2018</Copyright>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
-    <PackageReleaseNotes>supports efcore 3.x preview (not backward compatible. Do not use with Efcore 2.x)</PackageReleaseNotes>
+    <PackageReleaseNotes>supports efcore 3.x preview (not backward compatible. Do not use with Efcore 2.x)
+-rewrote the providers to have common codebase, and reuse the provider for multiple visitors
+- exposed WithExpressionVisitors to make it far easier to extend the functionality</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
   </PropertyGroup>
 
