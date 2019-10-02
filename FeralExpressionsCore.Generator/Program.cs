@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,27 @@ namespace FeralExpressionsCore.Generator
     {
         public static void Main(string[] args)
         {
+            IEnumerable<string> rest = args;
             try
             {
-                var expressionsExtensionPrefix = args[0];
+                var expressionsExtensionPrefix = rest.First();
+                rest = rest.Skip(1);
 
-                var inputFileNames = args.Skip(1);
+                IEnumerable<string> inputFileNames = Enumerable.Empty<string>();
+                if (rest.Any() && rest.Skip(1).Any() && rest.First().Equals("-f", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    rest = rest.Skip(1); // skip over the -f
+                    var fileNameOfListOfInputFileNames = rest.First();
+                    rest = rest.Skip(1);
+
+                    inputFileNames = inputFileNames.Concat(ReadLinesFromFile(fileNameOfListOfInputFileNames));
+                }
+                else
+                {
+
+                }
+
+                inputFileNames = inputFileNames.Concat(rest);
 
                 var runner = new GeneratorRunner(expressionsExtensionPrefix, msg => { });
 
@@ -30,6 +47,23 @@ namespace FeralExpressionsCore.Generator
             {
                 System.Console.Error.WriteLine(ex.ToString());
             }
+        }
+
+        private static IEnumerable<string> ReadLinesFromFile(string filePath)
+        {
+            using (var reader = new StreamReader(filePath))
+            {
+                var line = reader.ReadLine();
+                while (line != null)
+                {
+                    if (!String.IsNullOrWhiteSpace(line))
+                    {
+                        yield return line.Trim();
+                    }
+                    line = reader.ReadLine();
+                }
+            }
+
         }
     }
 }
