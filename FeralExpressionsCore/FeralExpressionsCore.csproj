@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <Configurations>Debug;Release;Release_netcore30</Configurations>
-    <Version>3.0.1-preview2</Version>
+    <Version>3.0.2</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -14,9 +14,7 @@ In order for this to work, the method must
 (b) have an expression body 
 (c) have any references to this explicitly written</Description>
     <Copyright>Copyright 2018</Copyright>
-    <PackageReleaseNotes>supports efcore 3.x preview (not backward compatible. Do not use with Efcore 2.x)
--rewrote the providers to have common codebase, and reuse the provider for multiple visitors
-- exposed WithExpressionVisitors to make it far easier to extend the functionality</PackageReleaseNotes>
+    <PackageReleaseNotes>- Fixed a build order bug</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
