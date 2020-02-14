@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
-	<Target Name="GenerateFeralExpressions" BeforeTargets="Build">
+	<Target Name="GenerateFeralExpressions" BeforeTargets="CoreCompile">
 		<ItemGroup>
 			<FeralExpressions_AllCompileItemsFile Include="$(MSBuildProjectDirectory)\obj\$([System.Guid]::NewGuid()).txt" />
 		</ItemGroup>
@@ -12,7 +12,10 @@
 		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="high" />
 		<Message Text="@(ExpressionsCompile)" Importance="high" />
 		<ItemGroup>
-			<Compile Include="@(ExpressionsCompile)" Exclude="@(Compile)" />
+			<Compile Include="@(ExpressionsCompile)" />
+			<Compile Include="@(Compile->Distinct())" Exclude="@(Compile)" />
 		</ItemGroup>
+		<Message Text="FeralExpressionsCore.Generator compile is now" Importance="high" />
+		<Message Text="@(Compile)" Importance="high" />
 	</Target>
 </Project>
