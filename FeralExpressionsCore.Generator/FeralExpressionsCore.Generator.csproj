@@ -23,7 +23,15 @@ public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_E
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageReleaseNotes>supports efcore 3.x preview (not backward compatible. Do not use with Efcore 2.x)</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
 	  <None Include="FeralExpressionsCore.Generator.targets">
