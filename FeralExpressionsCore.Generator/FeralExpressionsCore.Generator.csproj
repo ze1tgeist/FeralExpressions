@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>5.0.0-efcore.preview7</Version>
+    <Version>5.0.0-efcore5.preview7</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
