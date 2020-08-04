@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Configurations>Debug;Release;Release_netcore30</Configurations>
-    <Version>3.0.2</Version>
+    <Version>5.0.0-efcore.preview7</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -14,15 +14,15 @@ In order for this to work, the method must
 (b) have an expression body 
 (c) have any references to this explicitly written</Description>
     <Copyright>Copyright 2018</Copyright>
-    <PackageReleaseNotes>- Fixed a build order bug</PackageReleaseNotes>
+    <PackageReleaseNotes>- updated it to efcore 5.0.0.preview7</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-preview.7.20365.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.7.20365.15" />
   </ItemGroup>
 
   <ItemGroup>
