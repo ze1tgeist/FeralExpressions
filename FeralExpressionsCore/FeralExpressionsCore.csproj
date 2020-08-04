@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <Configurations>Debug;Release;Release_netcore30</Configurations>
-    <Version>5.0.0-efcore5.preview7</Version>
+    <Version>5.0.0-efcore5.preview7-rc1</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />

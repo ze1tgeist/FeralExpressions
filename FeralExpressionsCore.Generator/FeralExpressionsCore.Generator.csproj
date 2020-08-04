@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <StartupObject>FeralExpressionsCore.Generator.Program</StartupObject>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>5.0.0-efcore5.preview7</Version>
+    <Version>5.0.0-efcore5.preview7-rc1</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -23,6 +23,7 @@ public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_E
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageReleaseNotes>- updated it to efcore 5.0.0.preview7</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
 
   <ItemGroup>
