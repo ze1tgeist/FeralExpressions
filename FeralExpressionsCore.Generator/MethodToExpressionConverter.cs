@@ -11,10 +11,12 @@ namespace FeralExpressionsCore.Generator
 {
     public class MethodToExpressionConverter
     {
-        public PropertyDeclarationSyntax Convert(MethodDeclarationSyntax method, SemanticModel semanticModel = null)
+        public ClassDeclarationSyntax Convert(MethodDeclarationSyntax method, SemanticModel semanticModel = null)
         {
             if (method.Body == null && method.ExpressionBody != null && AreAllParentClassesPartial(method))
             {
+                var indent = method.GetLeadingTrivia().Last();
+
                 ISymbol methodSymbol = null;
                 if (semanticModel != null)
                 {
@@ -55,7 +57,7 @@ namespace FeralExpressionsCore.Generator
                 var methodExpression = (CSharpSyntaxNode)new ThisOrImplicitThisTo_ThisRewriter(semanticModel, methodSymbol).Visit(method.ExpressionBody.Expression).WithLeadingTrivia(method.ExpressionBody.Expression.GetLeadingTrivia());
                 var lamdaExpression = SyntaxFactory.ParenthesizedLambdaExpression(
                     SyntaxFactory.Token(SyntaxKind.None),
-                    lambdaParameters.WithLeadingTrivia(SyntaxFactory.CarriageReturn,SyntaxFactory.LineFeed,method.GetLeadingTrivia().Last()),
+                    lambdaParameters.WithLeadingTrivia(SyntaxFactory.CarriageReturn,SyntaxFactory.LineFeed,indent, SyntaxFactory.Tab, SyntaxFactory.Tab),
                     method.ExpressionBody.ArrowToken,
                     methodExpression);
                 var propertyExpressionBody = SyntaxFactory.ArrowExpressionClause
@@ -66,28 +68,51 @@ namespace FeralExpressionsCore.Generator
                 var kindsToRemove = new SyntaxKind[] { SyntaxKind.VirtualKeyword, SyntaxKind.NewKeyword, SyntaxKind.OverrideKeyword };
                 var modifiers = 
                     SyntaxFactory.TokenList(method.Modifiers.Where(t => !kindsToRemove.Contains(t.Kind()))) ;
-               
+
+                modifiers = SyntaxFactory.TokenList(modifiers.Select(m => m.WithLeadingTrivia().WithTrailingTrivia(SyntaxFactory.Space)));
                 if (!modifiers.Any(SyntaxKind.StaticKeyword))
                 {
                     modifiers = SyntaxFactory.TokenList(modifiers.Union(Enumerable.Repeat(SyntaxFactory.Token(SyntaxKind.StaticKeyword).WithTrailingTrivia(SyntaxFactory.Space), 1)));
                 }
+
 
                 var propertyDec = SyntaxFactory.PropertyDeclaration(
                     method.AttributeLists,
                     modifiers,
                     expressionType,
                     null,
-                    SyntaxFactory.Identifier(method.Identifier.Text + "_Expression").WithTrailingTrivia(SyntaxFactory.Space),
+                    SyntaxFactory.Identifier("Expression").WithTrailingTrivia(SyntaxFactory.Space),
                     null,
                     propertyExpressionBody,
                     null,
                     SyntaxFactory.Token(SyntaxKind.SemicolonToken).WithTrailingTrivia(SyntaxFactory.CarriageReturn, SyntaxFactory.LineFeed)
-                ).WithLeadingTrivia(method.GetLeadingTrivia().Last());
-                return propertyDec;
+                ).WithLeadingTrivia(indent, SyntaxFactory.Tab);
+                //return propertyDec;
+
+                var members = SyntaxFactory.List<MemberDeclarationSyntax>(new MemberDeclarationSyntax[] { propertyDec });
+                var classDesc = SyntaxFactory.ClassDeclaration(method.Identifier.Text + "_ExpressionClass")
+                    .WithKeyword(
+                        SyntaxFactory.Token(SyntaxKind.ClassKeyword)
+                        .WithTrailingTrivia(SyntaxFactory.Space))
+                    .WithOpenBraceToken(IndentedOnOwnLine(SyntaxKind.OpenBraceToken, indent))
+                    .WithCloseBraceToken(IndentedOnOwnLine(SyntaxKind.CloseBraceToken, indent))
+                    .WithModifiers(modifiers)
+                    .WithLeadingTrivia(indent)
+                    .WithMembers(members);
+
+                return classDesc;
             }
             else
                 return null;
 
+        }
+
+        private SyntaxToken IndentedOnOwnLine(SyntaxKind syntaxKind, SyntaxTrivia indent)
+        {
+            return
+                SyntaxFactory.Token(syntaxKind)
+                .WithLeadingTrivia(SyntaxFactory.CarriageReturn, SyntaxFactory.LineFeed, indent)
+                .WithTrailingTrivia(SyntaxFactory.CarriageReturn, SyntaxFactory.LineFeed);
         }
 
         private TypeSyntax GetTypeOfClass(ClassDeclarationSyntax classDeclaration)

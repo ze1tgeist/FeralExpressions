@@ -123,7 +123,7 @@ namespace FeralExpressionsCore.Generator
         private class MethodExpression
         {
             public MemberDeclarationSyntax Method { get; set; }
-            public MemberDeclarationSyntax Expression { get; set; }
+            public ClassDeclarationSyntax Expression { get; set; }
         }
 
         private (CompilationUnitSyntax root, SemanticModel semanticModel) ReadRoot(string path)
