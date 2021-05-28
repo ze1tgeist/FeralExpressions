@@ -22,7 +22,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"OuterPartialClass.cs",
                     methodName: "StaticMethodInOuterPartial",
-                    expectedExpressionText: "        public static Expression<Func<string>> StaticMethodInOuterPartial_Expression =>\r\n        () => \"def\";\r\n"
+                    expectedExpressionText: "        public static class StaticMethodInOuterPartial_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<string>> Expression =>\r\n        \t\t() => \"def\";\r\n\r\n        }\r\n"
                 );
         }
 
@@ -33,7 +33,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"OuterPartialClass.cs",
                     methodName: "MethodInOuterPartial",
-                    expectedExpressionText: "        public static Expression<Func<OuterPartialClass,string>> MethodInOuterPartial_Expression =>\r\n        (OuterPartialClass _this) => \"abc\";\r\n"
+                    expectedExpressionText: "        public static class MethodInOuterPartial_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<OuterPartialClass,string>> Expression =>\r\n        \t\t(OuterPartialClass _this) => \"abc\";\r\n\r\n        }\r\n"
                 );
         }
 
@@ -44,7 +44,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"OuterPartialClass.cs",
                     methodName: "PrivateMethodInOuterPartial",
-                    expectedExpressionText: "        private static Expression<Func<OuterPartialClass,string>> PrivateMethodInOuterPartial_Expression =>\r\n        (OuterPartialClass _this) => \"abc\";\r\n"
+                    expectedExpressionText: "        private static class PrivateMethodInOuterPartial_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<OuterPartialClass,string>> Expression =>\r\n        \t\t(OuterPartialClass _this) => \"abc\";\r\n\r\n        }\r\n"
                 );
         }
 
@@ -55,7 +55,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"OuterPartialClass.cs",
                     methodName: "MethodWithInterestingArgsInOuterPartial",
-                    expectedExpressionText: "        public static Expression<Func<OuterPartialClass,string,int,string,string>> MethodWithInterestingArgsInOuterPartial_Expression =>\r\n        (OuterPartialClass _this, string arg1, int arg2, string arg3) =>\r\n            $\"{arg1}+{arg2}+{arg3}\";\r\n"
+                    expectedExpressionText: "        public static class MethodWithInterestingArgsInOuterPartial_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<OuterPartialClass,string,int,string,string>> Expression =>\r\n        \t\t(OuterPartialClass _this, string arg1, int arg2, string arg3) =>\r\n            $\"{arg1}+{arg2}+{arg3}\";\r\n\r\n        }\r\n"
                 );
         }
 
@@ -66,7 +66,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"OuterPartialClass.cs",
                     methodName: "MethodInNestedPartial",
-                    expectedExpressionText: "            public static Expression<Func<NestedPartialClass,int>> MethodInNestedPartial_Expression =>\r\n            (NestedPartialClass _this) => 0;\r\n"
+                    expectedExpressionText: "            public static class MethodInNestedPartial_ExpressionClass\r\n            {\r\n            \tpublic static Expression<Func<NestedPartialClass,int>> Expression =>\r\n            \t\t(NestedPartialClass _this) => 0;\r\n\r\n            }\r\n"
                 );
         }
 
@@ -99,7 +99,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"OuterPartialClass.cs",
                     methodName: "MethodThatCallsAnInstanceMethod",
-                    expectedExpressionText: "        public static Expression<Func<OuterPartialClass,string>> MethodThatCallsAnInstanceMethod_Expression =>\r\n        (OuterPartialClass _this) =>\r\n            _this.MethodInOuterPartial();\r\n"
+                    expectedExpressionText: "        public static class MethodThatCallsAnInstanceMethod_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<OuterPartialClass,string>> Expression =>\r\n        \t\t(OuterPartialClass _this) =>\r\n            _this.MethodInOuterPartial();\r\n\r\n        }\r\n"
                 );
         }
 
@@ -110,7 +110,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"OuterPartialClass.cs",
                     methodName: "MethodThatCallsAStaticMethod",
-                    expectedExpressionText: "        public static Expression<Func<OuterPartialClass,string>> MethodThatCallsAStaticMethod_Expression =>\r\n        (OuterPartialClass _this) =>\r\n            StaticMethodInOuterPartial();\r\n"
+                    expectedExpressionText: "        public static class MethodThatCallsAStaticMethod_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<OuterPartialClass,string>> Expression =>\r\n        \t\t(OuterPartialClass _this) =>\r\n            StaticMethodInOuterPartial();\r\n\r\n        }\r\n"
                 );
         }
 
@@ -121,7 +121,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"ExtensionMethods.cs",
                     methodName: "Append",
-                    expectedExpressionText: "        public static Expression<Func<string,string,string>> Append_Expression =>\r\n        (string str, string arg) => str + arg;\r\n"
+                    expectedExpressionText: "        public static class Append_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<string,string,string>> Expression =>\r\n        \t\t(string str, string arg) => str + arg;\r\n\r\n        }\r\n"
                 );
         }
 
@@ -132,7 +132,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"BaseClass.cs",
                     methodName: "VirtualMethodInBaseClass",
-                    expectedExpressionText: "        public static Expression<Func<BaseClass,int>> VirtualMethodInBaseClass_Expression =>\r\n        (BaseClass _this) => 0;\r\n"
+                    expectedExpressionText: "        public static class VirtualMethodInBaseClass_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<BaseClass,int>> Expression =>\r\n        \t\t(BaseClass _this) => 0;\r\n\r\n        }\r\n"
                 );
         }
 
@@ -143,7 +143,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"SubClass.cs",
                     methodName: "VirtualMethodInBaseClass",
-                    expectedExpressionText: "        public static Expression<Func<SubClass,int>> VirtualMethodInBaseClass_Expression =>\r\n        (SubClass _this) => 1;\r\n"
+                    expectedExpressionText: "        public static class VirtualMethodInBaseClass_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<SubClass,int>> Expression =>\r\n        \t\t(SubClass _this) => 1;\r\n\r\n        }\r\n"
                 );
         }
 
@@ -154,7 +154,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"SubClass.cs",
                     methodName: "NonVirtualMethodInBaseClass",
-                    expectedExpressionText: "        public static Expression<Func<SubClass,int>> NonVirtualMethodInBaseClass_Expression =>\r\n        (SubClass _this) => 2;\r\n"
+                    expectedExpressionText: "        public static class NonVirtualMethodInBaseClass_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<SubClass,int>> Expression =>\r\n        \t\t(SubClass _this) => 2;\r\n\r\n        }\r\n"
                 );
         }
 
@@ -165,7 +165,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"ThisIsTestClass.cs",
                     methodName: "MethodWithThisIs",
-                    expectedExpressionText: "        public static Expression<Func<ThisIsTestClass,bool>> MethodWithThisIs_Expression =>\r\n        (ThisIsTestClass _this) => _this is ThisIsTestClass;\r\n"
+                    expectedExpressionText: "        public static class MethodWithThisIs_ExpressionClass\r\n        {\r\n        \tpublic static Expression<Func<ThisIsTestClass,bool>> Expression =>\r\n        \t\t(ThisIsTestClass _this) => _this is ThisIsTestClass;\r\n\r\n        }\r\n"
                 );
         }
 

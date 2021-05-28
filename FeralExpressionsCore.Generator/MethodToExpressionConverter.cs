@@ -78,7 +78,10 @@ namespace FeralExpressionsCore.Generator
 
                 var propertyDec = SyntaxFactory.PropertyDeclaration(
                     method.AttributeLists,
-                    modifiers,
+                    SyntaxFactory.TokenList(
+                        SyntaxFactory.Token(SyntaxKind.PublicKeyword).WithTrailingTrivia(SyntaxFactory.Space),
+                        SyntaxFactory.Token(SyntaxKind.StaticKeyword).WithTrailingTrivia(SyntaxFactory.Space)
+                    ),
                     expressionType,
                     null,
                     SyntaxFactory.Identifier("Expression").WithTrailingTrivia(SyntaxFactory.Space),
