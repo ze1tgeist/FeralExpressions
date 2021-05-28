@@ -5,7 +5,7 @@
 			<FeralExpressions_AllCompileItemsFile Include="$(MSBuildProjectDirectory)\obj\$([System.Guid]::NewGuid()).txt" />
 		</ItemGroup>
 		<WriteLinesToFile File="@(FeralExpressions_AllCompileItemsFile)" Lines="@(Compile->'%(FullPath)', '&#13;&#10;')" Overwrite="true" Encoding="Unicode" />
-		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\tools\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; -f &quot;@(FeralExpressions_AllCompileItemsFile)&quot;" ConsoleToMSBuild="true" >
+		<Exec Command="dotnet $(MSBuildThisFileDirectory)../tools/FeralExpressionsCore.Generator.dll &quot;.expressions&quot; -f &quot;@(FeralExpressions_AllCompileItemsFile)&quot;" ConsoleToMSBuild="true" >
 			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
 		</Exec>
 		<Delete Files="@(FeralExpressions_AllCompileItemsFile)" />

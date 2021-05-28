@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>3.0.2</Version>
+    <Version>3.1.0-preview2</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />

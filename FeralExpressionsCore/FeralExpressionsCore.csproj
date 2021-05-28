@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <Configurations>Debug;Release;Release_netcore30</Configurations>
-    <Version>3.0.2</Version>
+    <Version>3.1.0-preview2</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -14,7 +14,7 @@ In order for this to work, the method must
 (b) have an expression body 
 (c) have any references to this explicitly written</Description>
     <Copyright>Copyright 2018</Copyright>
-    <PackageReleaseNotes>- Fixed a build order bug</PackageReleaseNotes>
+    <PackageReleaseNotes>- Added Linux Support second attempt</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
