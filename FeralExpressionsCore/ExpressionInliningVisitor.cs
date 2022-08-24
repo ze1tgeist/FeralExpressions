@@ -76,7 +76,8 @@ namespace FeralExpressionsCore
             var bindingFlags = BindingFlags.Static
                 | (method.IsPublic ? BindingFlags.Public : BindingFlags.NonPublic);
 
-            var property = method.DeclaringType.GetProperty(method.Name + "_Expression", bindingFlags);
+            var propertyName = GetPropertyName(method);
+            var property = method.DeclaringType.GetProperty(propertyName, bindingFlags);
             if (property != null && FunctionMatchesExpressionType(method, property.PropertyType))
             {
                 var expression = property.GetValue(null,null);
@@ -88,6 +89,39 @@ namespace FeralExpressionsCore
             }
         }
 
+        private string GetPropertyName(MethodInfo method)
+        {
+            var name = method.Name;
+            foreach (var p in method.GetParameters())
+            {
+                string typeName = GetTypeName(p.ParameterType);
+
+                if (typeName != null)
+                {
+                    name += "_" + typeName;
+                }
+
+            }
+
+            return name + "_Expression";
+        }
+
+        private string GetTypeName(Type type)
+        {
+            if (type.IsArray)
+            {
+                var rnk = type.GetArrayRank();
+                var arrayWord = rnk == 1 ? "ArrayOf" : $"Array{rnk}Of";
+                return arrayWord + GetTypeName(type.GetElementType());
+            }
+            else
+            {
+                return type.Name;
+            }
+
+            return null;
+
+        }
         private Expression InlineExpression(LambdaExpression lambda, MethodCallExpression method)
         {
             var parameterValues = new Dictionary<ParameterExpression, Expression>();

@@ -72,12 +72,14 @@ namespace FeralExpressionsCore.Generator
                     modifiers = SyntaxFactory.TokenList(modifiers.Union(Enumerable.Repeat(SyntaxFactory.Token(SyntaxKind.StaticKeyword).WithTrailingTrivia(SyntaxFactory.Space), 1)));
                 }
 
+                var propName = GetPropertyName(method);
+
                 var propertyDec = SyntaxFactory.PropertyDeclaration(
                     method.AttributeLists,
                     modifiers,
                     expressionType,
                     null,
-                    SyntaxFactory.Identifier(method.Identifier.Text + "_Expression").WithTrailingTrivia(SyntaxFactory.Space),
+                    SyntaxFactory.Identifier(propName).WithTrailingTrivia(SyntaxFactory.Space),
                     null,
                     propertyExpressionBody,
                     null,
@@ -87,6 +89,61 @@ namespace FeralExpressionsCore.Generator
             }
             else
                 return null;
+
+        }
+
+        private string GetPropertyName(MethodDeclarationSyntax method)
+        {
+            var name = method.Identifier.Text;
+            foreach (var p in method.ParameterList.Parameters)
+            {
+                string typeName = GetTypeName(p.Type);
+
+                if (typeName != null)
+                {
+                    name += "_" + typeName;
+                }
+
+            }
+
+            return name + "_Expression";
+        }
+
+        private string GetTypeName(TypeSyntax type)
+        {
+            if (type is SimpleNameSyntax sn)
+            {
+                return sn.Identifier.Text;
+            }
+            else if (type is QualifiedNameSyntax qn)
+            {
+                return GetTypeName(qn.Right);
+            }
+            else if (type is ArrayTypeSyntax arr)
+            {
+                var arrayWords = String.Join("", arr.RankSpecifiers.Select(rnk => rnk.Rank == 1 ? "ArrayOf": $"Array{rnk.Rank}Of").Reverse());
+                return arrayWords + GetTypeName(arr.ElementType);
+            }
+            else if (type is NullableTypeSyntax n)
+            {
+                return "NullableOf" + GetTypeName(n.ElementType);
+            }
+            else if (type is PredefinedTypeSyntax p)
+            {
+                var txt = p.Keyword.Text;
+                switch (txt)
+                {
+                    case "string": return "String";
+                    case "int": return "Int32";
+                    case "long": return "Int64";
+                    case "float": return "Single";
+                    case "double": return "Double";
+                    case "byte": return "Byte";
+                    default: return txt;
+                }
+            }
+
+            return null;
 
         }
 

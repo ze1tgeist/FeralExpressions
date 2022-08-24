@@ -16,6 +16,93 @@ namespace FeralExpressionsCore.Generator.Tests
     public partial class MethodToExpressionConverterTests
     {
         [TestMethod]
+        public void MethodToExpressionConverter_converts_type_qualified_parameter_simpleName()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ParameterTypesTestClass.cs",
+                    methodName: "SimpleName",
+                    expectedExpressionText: "        public static Expression<Func<ParameterTypesTestClass,String,System.String>> SimpleName_String_Expression =>\r\n        (ParameterTypesTestClass _this, String str) => str;\r\n"
+                );
+        }
+
+        [TestMethod]
+        public void MethodToExpressionConverter_converts_type_qualified_parameter_QualifiedName()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ParameterTypesTestClass.cs",
+                    methodName: "QualifiedName",
+                    expectedExpressionText: "        public static Expression<Func<ParameterTypesTestClass,System.Text.RegularExpressions.Regex,System.String>> QualifiedName_Regex_Expression =>\r\n        (ParameterTypesTestClass _this, System.Text.RegularExpressions.Regex str) => \"abc\";\r\n"
+                );
+        }
+
+        [TestMethod]
+        public void MethodToExpressionConverter_converts_type_qualified_parameter_Array()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ParameterTypesTestClass.cs",
+                    methodName: "ArrayName",
+                    expectedExpressionText: "        public static Expression<Func<ParameterTypesTestClass,System.Text.RegularExpressions.Regex[],System.String>> ArrayName_ArrayOfRegex_Expression =>\r\n        (ParameterTypesTestClass _this, System.Text.RegularExpressions.Regex[] str) => \"abc\";\r\n"
+                );
+        }
+
+        [TestMethod]
+        public void MethodToExpressionConverter_converts_type_qualified_parameter_DoubleArray()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ParameterTypesTestClass.cs",
+                    methodName: "DoubleArrayName",
+                    expectedExpressionText: "        public static Expression<Func<ParameterTypesTestClass,System.Text.RegularExpressions.Regex[,],System.String>> DoubleArrayName_Array2OfRegex_Expression =>\r\n        (ParameterTypesTestClass _this, System.Text.RegularExpressions.Regex[,] str) => \"abc\";\r\n"
+                );
+        }
+
+        [TestMethod]
+        public void MethodToExpressionConverter_converts_type_qualified_parameter_RaggedArray()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ParameterTypesTestClass.cs",
+                    methodName: "RaggedArrayName",
+                    expectedExpressionText: "        public static Expression<Func<ParameterTypesTestClass,System.Text.RegularExpressions.Regex[,][],System.String>> RaggedArrayName_ArrayOfArray2OfRegex_Expression =>\r\n        (ParameterTypesTestClass _this, System.Text.RegularExpressions.Regex[,][] str) => \"abc\";\r\n"
+                );
+        }
+
+        [TestMethod]
+        public void MethodToExpressionConverter_converts_type_qualified_parameter_Nullable()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ParameterTypesTestClass.cs",
+                    methodName: "NullableName",
+                    expectedExpressionText: "        public static Expression<Func<ParameterTypesTestClass,DateTime?,System.String>> NullableName_NullableOfDateTime_Expression =>\r\n        (ParameterTypesTestClass _this, DateTime? str) => \"abc\";\r\n"
+                );
+        }
+        [TestMethod]
+        public void MethodToExpressionConverter_converts_type_qualified_parameter_PredefinedString()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ParameterTypesTestClass.cs",
+                    methodName: "PredefinedStringName",
+                    expectedExpressionText: "        public static Expression<Func<ParameterTypesTestClass,string,System.String>> PredefinedStringName_String_Expression =>\r\n        (ParameterTypesTestClass _this, string str) => \"abc\";\r\n"
+                );
+        }
+
+        [TestMethod]
+        public void MethodToExpressionConverter_converts_type_qualified_parameter_PredefinedInt()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"ParameterTypesTestClass.cs",
+                    methodName: "PredefinedIntName",
+                    expectedExpressionText: "        public static Expression<Func<ParameterTypesTestClass,int,System.String>> PredefinedIntName_Int32_Expression =>\r\n        (ParameterTypesTestClass _this, int i) => \"abc\";\r\n"
+                );
+        }
+
+        [TestMethod]
         public void MethodToExpressionConverter_converts_static_expression_bodied_method_in_outer_partial_class_to_expression()
         {
             TestMethodToExpression
@@ -55,7 +142,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"OuterPartialClass.cs",
                     methodName: "MethodWithInterestingArgsInOuterPartial",
-                    expectedExpressionText: "        public static Expression<Func<OuterPartialClass,string,int,string,string>> MethodWithInterestingArgsInOuterPartial_Expression =>\r\n        (OuterPartialClass _this, string arg1, int arg2, string arg3) =>\r\n            $\"{arg1}+{arg2}+{arg3}\";\r\n"
+                    expectedExpressionText: "        public static Expression<Func<OuterPartialClass,string,int,string,string>> MethodWithInterestingArgsInOuterPartial_String_Int32_String_Expression =>\r\n        (OuterPartialClass _this, string arg1, int arg2, string arg3) =>\r\n            $\"{arg1}+{arg2}+{arg3}\";\r\n"
                 );
         }
 
@@ -121,7 +208,7 @@ namespace FeralExpressionsCore.Generator.Tests
                 (
                     codeFilePath: @"ExtensionMethods.cs",
                     methodName: "Append",
-                    expectedExpressionText: "        public static Expression<Func<string,string,string>> Append_Expression =>\r\n        (string str, string arg) => str + arg;\r\n"
+                    expectedExpressionText: "        public static Expression<Func<string,string,string>> Append_String_String_Expression =>\r\n        (string str, string arg) => str + arg;\r\n"
                 );
         }
 

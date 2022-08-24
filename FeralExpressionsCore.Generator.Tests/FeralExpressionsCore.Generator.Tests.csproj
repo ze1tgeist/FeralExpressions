@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ParameterTypesTestClass.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Update="BaseClass.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

@@ -10,14 +10,14 @@ namespace FeralExpressionsCore.Tests.EF
 
     public static partial class EntityRepositoryExtensions
     {
-        public static Expression<Func<IQueryable<IEntity>,IQueryable<IEntity>>> GetEntitiesStartingWithQAndEndingWithP_Expression =>
+        public static Expression<Func<IQueryable<IEntity>,IQueryable<IEntity>>> GetEntitiesStartingWithQAndEndingWithP_IQueryable_Expression =>
         (IQueryable<IEntity> entities) =>
             entities.Where(e => StartsWithQAndEndingWithP(e));
-        public static Expression<Func<IEntity,bool>> StartsWithQAndEndingWithP_Expression =>
+        public static Expression<Func<IEntity,bool>> StartsWithQAndEndingWithP_IEntity_Expression =>
         (IEntity entity) => StartsWith(entity, "Q") && EndsWith(entity, "P");
-        public static Expression<Func<IEntity,string,bool>> StartsWith_Expression =>
+        public static Expression<Func<IEntity,string,bool>> StartsWith_IEntity_String_Expression =>
         (IEntity entity, string letter) => entity.Key.StartsWith(letter);
-        public static Expression<Func<IEntity,string,bool>> EndsWith_Expression =>
+        public static Expression<Func<IEntity,string,bool>> EndsWith_IEntity_String_Expression =>
         (IEntity entity, string letter) => entity.Key.EndsWith(letter);
 
     }
