@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>5.0.0-efcore5.preview7-rc1</Version>
+    <Version>5.1.0</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -21,9 +21,12 @@ would produce
 public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_Expression =&gt; (string arg1) =&gt; ""abc"" + arg1;</Description>
     <Copyright>Copyright 2018</Copyright>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
-    <PackageReleaseNotes>- updated it to efcore 5.0.0.preview7</PackageReleaseNotes>
+    <PackageReleaseNotes>
+		- Support for overloading methods
+		- Removed excess logging from the build panel
+	</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
-    <NoWin32Manifest>true</NoWin32Manifest>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

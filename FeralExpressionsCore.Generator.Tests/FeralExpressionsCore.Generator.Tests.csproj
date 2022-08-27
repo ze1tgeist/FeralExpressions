@@ -33,6 +33,9 @@
     <Compile Update="OuterPartialClass.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="OverloadClass.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Update="SubClass.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

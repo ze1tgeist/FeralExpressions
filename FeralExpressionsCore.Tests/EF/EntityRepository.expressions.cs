@@ -15,7 +15,9 @@ namespace FeralExpressionsCore.Tests.EF
             entities.Where(e => StartsWithQAndEndingWithP(e));
         public static Expression<Func<IEntity,bool>> StartsWithQAndEndingWithP_Expression =>
         (IEntity entity) => StartsWith(entity, "Q") && EndsWith(entity, "P");
-        public static Expression<Func<IEntity,string,bool>> StartsWith_Expression =>
+        public static Expression<Func<IEntity,string,string,bool>> StartsWith_Expression =>
+        (IEntity entity, string letter, string letter2) => entity.Key.StartsWith(letter);
+        public static Expression<Func<IEntity,string,bool>> StartsWith_Expression1 =>
         (IEntity entity, string letter) => entity.Key.StartsWith(letter);
         public static Expression<Func<IEntity,string,bool>> EndsWith_Expression =>
         (IEntity entity, string letter) => entity.Key.EndsWith(letter);

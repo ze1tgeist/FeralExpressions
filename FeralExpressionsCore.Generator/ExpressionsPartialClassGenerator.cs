@@ -39,13 +39,19 @@ namespace FeralExpressionsCore.Generator
 
         public CompilationUnitSyntax Generate(CompilationUnitSyntax sourceRoot, SemanticModel semanticModel = null)
         {
+            var methodCounts =
+                sourceRoot.DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .GroupBy(m => new { m.Parent, m.Identifier.Text })
+                .ToDictionary(grp => grp.Key, grp => 0);
+
             var methodExpressions =
                 sourceRoot.DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Select(m => new MethodExpression()
                 {
                     Method = m,
-                    Expression = methodConverter.Convert(m, semanticModel)
+                    Expression = methodConverter.Convert(m, methodCounts[new { m.Parent, m.Identifier.Text }]++, semanticModel)
                 })
                 .Where(pc => pc.Expression != null)
                 .ToList();

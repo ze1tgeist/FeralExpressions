@@ -76,8 +76,12 @@ namespace FeralExpressionsCore
             var bindingFlags = BindingFlags.Static
                 | (method.IsPublic ? BindingFlags.Public : BindingFlags.NonPublic);
 
-            var property = method.DeclaringType.GetProperty(method.Name + "_Expression", bindingFlags);
-            if (property != null && FunctionMatchesExpressionType(method, property.PropertyType))
+            var properties = method.DeclaringType.GetProperties(bindingFlags);
+            var property = properties.FirstOrDefault(p =>
+                p.Name.StartsWith(method.Name + "_Expression")
+                && FunctionMatchesExpressionType(method, p.PropertyType)
+            );
+            if (property != null)
             {
                 var expression = property.GetValue(null,null);
                 return expression as LambdaExpression;

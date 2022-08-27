@@ -8,9 +8,8 @@
 		<Exec Command="dotnet $(MSBuildThisFileDirectory)../tools/FeralExpressionsCore.Generator.dll &quot;.expressions&quot; -f &quot;@(FeralExpressions_AllCompileItemsFile)&quot;" ConsoleToMSBuild="true" >
 			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
 		</Exec>
-		<Delete Files="@(FeralExpressions_AllCompileItemsFile)" />
-		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="high" />
-		<Message Text="@(ExpressionsCompile)" Importance="high" />
+		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="low" />
+		<Message Text="@(ExpressionsCompile)" Importance="low" />
 		<ItemGroup>
 			<Compile Include="@(ExpressionsCompile)" />
 			<Compile Include="@(Compile->Distinct())" Exclude="@(Compile)" />
