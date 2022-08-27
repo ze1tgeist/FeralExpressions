@@ -22,8 +22,7 @@ namespace FeralExpressionsCore.Tests.EF
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                    .UseSqlServer(@"Data Source=localhost;Initial Catalog=FeralExpressionsCore;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
-                    .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+                    .UseSqlServer(@"Data Source=localhost;Initial Catalog=FeralExpressionsCore;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
