@@ -26,6 +26,7 @@ public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_E
 		- Removed excess logging from the build panel
 	</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
