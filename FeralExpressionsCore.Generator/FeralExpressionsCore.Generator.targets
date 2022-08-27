@@ -4,8 +4,8 @@
 		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\tools\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; @(Compile->'&quot;%(FullPath)&quot;', ' ')" ConsoleToMSBuild="true" >
 			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
 		</Exec>
-		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="high" />
-		<Message Text="@(ExpressionsCompile)" Importance="high" />
+		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="low" />
+		<Message Text="@(ExpressionsCompile)" Importance="low" />
 		<ItemGroup>
 			<Compile Include="@(ExpressionsCompile)" Exclude="@(Compile)" />
 		</ItemGroup>
