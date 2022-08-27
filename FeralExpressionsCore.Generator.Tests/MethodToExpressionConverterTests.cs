@@ -27,6 +27,18 @@ namespace FeralExpressionsCore.Generator.Tests
         }
 
         [TestMethod]
+        public void MethodToExpressionConverter_appends_methodIndex_greaterthan_zero()
+        {
+            TestMethodToExpression
+                (
+                    codeFilePath: @"OuterPartialClass.cs",
+                    methodName: "StaticMethodInOuterPartial",
+                    expectedExpressionText: "        public static Expression<Func<string>> StaticMethodInOuterPartial_Expression1 =>\r\n        () => \"def\";\r\n",
+                    methodIndex: 1
+                );
+        }
+
+        [TestMethod]
         public void MethodToExpressionConverter_converts_expression_bodied_method_in_outer_partial_class_to_expression()
         {
             TestMethodToExpression
@@ -171,14 +183,14 @@ namespace FeralExpressionsCore.Generator.Tests
 
 
 
-        private void TestMethodToExpression(string codeFilePath, string methodName, string expectedExpressionText)
+        private void TestMethodToExpression(string codeFilePath, string methodName, string expectedExpressionText, int methodIndex = 0)
         {
             var sut = new MethodToExpressionConverter();
 
             var root = ReadRoot(codeFilePath);
             var method = GetMethod(methodName, root);
 
-            var actual = sut.Convert(method)?.ToFullString();
+            var actual = sut.Convert(method, methodIndex)?.ToFullString();
 
             Assert.AreEqual(expectedExpressionText, actual);
 

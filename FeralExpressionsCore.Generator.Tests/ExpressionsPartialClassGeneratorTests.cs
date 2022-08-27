@@ -28,6 +28,20 @@ namespace FeralExpressionsCore.Generator.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void ExpressionPartialClassGenerator_converts_Overloads()
+        {
+            var sut = new ExpressionsPartialClassGenerator(new MethodToExpressionConverter(), ".expressions");
+
+            var root = ReadRoot(@"OverloadClass.cs");
+
+            var actual = sut.Generate(root)?.ToFullString();
+
+            var expected = "using System;\r\nusing System.Collections.Generic;\r\nusing System.Text;\r\nusing System.Linq.Expressions;\r\n\r\nnamespace FeralExpressionsCore.Generator.Tests\r\n{\r\n    public partial class OverloadClass\r\n    {\r\n        public partial class Container1\r\n        {\r\n            public static Expression<Func<Container1,string,string,string>> Method_Expression =>\r\n            (Container1 _this, string arg1, string arg2) => arg1;\r\n            public static Expression<Func<Container1,string,string>> Method_Expression1 =>\r\n            (Container1 _this, string arg1) => arg1;\r\n        }\r\n\r\n        public partial class Container2\r\n        {\r\n            public static Expression<Func<Container2,string,string,string>> Method_Expression =>\r\n            (Container2 _this, string arg1, string arg2) => arg1;\r\n\r\n        }\r\n        public static Expression<Func<OverloadClass,string,string,string>> Method_Expression =>\r\n        (OverloadClass _this, string arg1, string arg2) => arg1;\r\n        public static Expression<Func<OverloadClass,string,string>> Method_Expression1 =>\r\n        (OverloadClass _this, string arg1) => arg1;\r\n\r\n    }\r\n}\r\n";
+
+            Assert.AreEqual(expected, actual);
+        }
+
         public void ExpressionPartialClassGenerator_converts_OuterNonPartialClass()
         {
             var sut = new ExpressionsPartialClassGenerator(new MethodToExpressionConverter(), ".expressions");

@@ -11,7 +11,7 @@ namespace FeralExpressionsCore.Generator
 {
     public class MethodToExpressionConverter
     {
-        public PropertyDeclarationSyntax Convert(MethodDeclarationSyntax method, SemanticModel semanticModel = null)
+        public PropertyDeclarationSyntax Convert(MethodDeclarationSyntax method, int methodIndex, SemanticModel semanticModel = null)
         {
             if (method.Body == null && method.ExpressionBody != null && AreAllParentClassesPartial(method))
             {
@@ -71,13 +71,15 @@ namespace FeralExpressionsCore.Generator
                 {
                     modifiers = SyntaxFactory.TokenList(modifiers.Union(Enumerable.Repeat(SyntaxFactory.Token(SyntaxKind.StaticKeyword).WithTrailingTrivia(SyntaxFactory.Space), 1)));
                 }
+                var methodIndexString = methodIndex > 0 ? methodIndex.ToString() : "";
 
+                var propName = method.Identifier.Text + "_Expression" + methodIndexString;
                 var propertyDec = SyntaxFactory.PropertyDeclaration(
                     method.AttributeLists,
                     modifiers,
                     expressionType,
                     null,
-                    SyntaxFactory.Identifier(method.Identifier.Text + "_Expression").WithTrailingTrivia(SyntaxFactory.Space),
+                    SyntaxFactory.Identifier(propName).WithTrailingTrivia(SyntaxFactory.Space),
                     null,
                     propertyExpressionBody,
                     null,

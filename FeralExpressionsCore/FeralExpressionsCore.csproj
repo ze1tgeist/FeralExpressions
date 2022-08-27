@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <Configurations>Debug;Release;Release_netcore20</Configurations>
-    <Version>3.0.0-preview</Version>
+    <Version>3.1.0</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -14,7 +14,10 @@ In order for this to work, the method must
 (b) have an expression body 
 (c) have any references to this explicitly written</Description>
     <Copyright>Copyright 2018</Copyright>
-    <PackageReleaseNotes>supports efcore 3.x preview (not backward compatible. Do not use with Efcore 2.x)</PackageReleaseNotes>
+    <PackageReleaseNotes>
+		- Support for overloading methods
+		- Removed excess logging from the build panel
+	</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

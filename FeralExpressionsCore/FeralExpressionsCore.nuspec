@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>FeralExpressionsCore</id>
-		<version>1.3.0-alpha</version>
+		<version>3.1.0</version>
 		<title>FeralExpressionsCore</title>
 		<authors>ruben morton</authors>
 		<owners>ruben morton</owners>
@@ -18,7 +18,8 @@ In order for this to work, the method must
 (c) have any references to this explicitly written</description>
 		<summary>Allows inline expansion of method calls in Expressions.</summary>
 		<releaseNotes>
-			- Removed dependencies on Microsoft Build framework from the Generator, as it was causing problems with core.  Just run it as an exe.
+			- Support for overloading methods
+			- Removed excess logging from the build panel
 		</releaseNotes>
 		<copyright>Copyright 2018</copyright>
 		<tags>Linq EntityFrameworkCore Expressions Inline</tags>
