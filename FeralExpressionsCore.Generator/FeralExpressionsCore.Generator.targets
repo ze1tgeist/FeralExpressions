@@ -1,10 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
-	<Target Name="GenerateFeralExpressions" BeforeTargets="CoreCompile">
+	<Target Name="Declare_AllCompileItemsFile" BeforeTargets="GenerateFeralExpressions_AllCompileItemsFile">
 		<ItemGroup>
-			<FeralExpressions_AllCompileItemsFile Include="$(MSBuildProjectDirectory)/obj/$([System.Guid]::NewGuid()).txt" />
+			<FeralExpressions_AllCompileItemsFile Include="$(MSBuildProjectDirectory)/obj/$(MSBuildProjectName)_FeralExpressions.txt" />
+			<FeralExpressions_NonExpressions Include="@(Compile)" />
+			<FeralExpressions_NonExpressions Remove="*.expressions.cs" />
 		</ItemGroup>
-		<WriteLinesToFile File="@(FeralExpressions_AllCompileItemsFile)" Lines="@(Compile->'%(FullPath)', '&#13;&#10;')" Overwrite="true" Encoding="Unicode" />
+	</Target>
+	<Target Name="GenerateFeralExpressions_AllCompileItemsFile" BeforeTargets="GenerateFeralExpressions" Inputs="@(FeralExpressions_NonExpressions)" Outputs="@(FeralExpressions_AllCompileItemsFile)"  >
+		<WriteLinesToFile File="@(FeralExpressions_AllCompileItemsFile)" Lines="@(Compile->'%(FeralExpressions_NonExpressions)', '&#13;&#10;')" Overwrite="true" Encoding="Unicode" />
+	</Target>
+	<Target Name="GenerateFeralExpressions" BeforeTargets="CoreCompile" Inputs="@(FeralExpressions_AllCompileItemsFile)" Outputs="@(Compile)">
 		<Exec Command="dotnet $(MSBuildThisFileDirectory)../tools/FeralExpressionsCore.Generator.dll &quot;.expressions&quot; -f &quot;@(FeralExpressions_AllCompileItemsFile)&quot;" ConsoleToMSBuild="true" >
 			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
 		</Exec>
@@ -14,7 +20,7 @@
 			<Compile Include="@(ExpressionsCompile)" />
 			<Compile Include="@(Compile->Distinct())" Exclude="@(Compile)" />
 		</ItemGroup>
-		<Message Text="FeralExpressionsCore.Generator compile is now" Importance="high" />
-		<Message Text="@(Compile)" Importance="high" />
+		<Message Text="FeralExpressionsCore.Generator compile is now" Importance="low" />
+		<Message Text="@(Compile)" Importance="low" />
 	</Target>
 </Project>

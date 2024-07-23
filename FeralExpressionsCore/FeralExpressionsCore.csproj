@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <Configurations>Debug;Release;Release_netcore30</Configurations>
-    <Version>5.1.0</Version>
+    <Version>5.2.0</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -15,8 +15,7 @@ In order for this to work, the method must
 (c) have any references to this explicitly written</Description>
     <Copyright>Copyright 2018</Copyright>
     <PackageReleaseNotes>
-		- Support for overloading methods
-		- Removed excess logging from the build panel
+		- Added support for incremental builds
 	</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>

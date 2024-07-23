@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>5.1.0</Version>
+    <Version>5.2.0</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -22,8 +22,8 @@ public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_E
     <Copyright>Copyright 2018</Copyright>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageReleaseNotes>
-		- Support for overloading methods
-		- Removed excess logging from the build panel
+  - Added support for incremental builds
+l
 	</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
