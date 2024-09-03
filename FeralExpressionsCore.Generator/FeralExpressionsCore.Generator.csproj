@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <StartupObject>FeralExpressionsCore.Generator.Program</StartupObject>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>5.1.0</Version>
+    <Version>5.3.0</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -21,10 +21,10 @@ would produce
 public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_Expression =&gt; (string arg1) =&gt; ""abc"" + arg1;</Description>
     <Copyright>Copyright 2018</Copyright>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
-    <PackageReleaseNotes>
-		- Support for overloading methods
-		- Removed excess logging from the build panel
-	</PackageReleaseNotes>
+    <PackageReleaseNotes>- fixed a bug with the .targets file that was preventing updating .expressions.cs files
+- fixed a warning about expressions files twice in Compile
+- added using System to the .expressions file if it wasnt already there
+- updated dependencies to dotnet8 and efcore 6</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
@@ -36,7 +36,7 @@ public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_E
 	  </None>
   </ItemGroup>
   <ItemGroup>
-	  <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.8.2">
+	  <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0">
 		  <PrivateAssets>all</PrivateAssets>
 	  </PackageReference>
   </ItemGroup>
@@ -44,7 +44,7 @@ public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_E
 	<Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
 
 		<ItemGroup>
-			<_PackageFiles Include="bin\$(Configuration)\netcoreapp2.0\*.dll" Exclude="bin\$(Configuration)\netcoreapp2.0\FeralExpressionsCore*.dll">
+			<_PackageFiles Include="bin\$(Configuration)\net8.0\*.dll" Exclude="bin\$(Configuration)\net8.0\FeralExpressionsCore*.dll">
 				<PackagePath>tools</PackagePath>
 				<Visible>false</Visible>
 				<BuildAction>Content</BuildAction>

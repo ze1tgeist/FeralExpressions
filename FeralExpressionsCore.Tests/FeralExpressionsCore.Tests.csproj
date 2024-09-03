@@ -1,38 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netcoreapp3.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
-
+	
+	<PropertyGroup>
+		<FeralExpressionsGeneratorAssemblyPath>..\FeralExpressionsCore.Generator\bin\$(Configuration)\$(TargetFramework)\FeralExpressionsCore.Generator.dll</FeralExpressionsGeneratorAssemblyPath>
+	</PropertyGroup>
+	<Import Project="..\FeralExpressionsCore.Generator\FeralExpressionsCore.Generator.targets" />
+	
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-preview.7.20365.15" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.0-preview.7.20365.15" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.7.20365.15" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0-preview-20180109-01" />
-		<PackageReference Include="xunit" Version="2.3.1" />
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.0" />
+		<PackageReference Include="xunit" Version="2.9.0" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\FeralExpressionsCore\FeralExpressionsCore.csproj" />
 	</ItemGroup>
-	<Target Name="GenerateFeralExpressions" BeforeTargets="Build">
-		<ItemGroup>
-			<FeralExpressions_AllCompileItemsFile Include="$(MSBuildThisFileDirectory)\obj\$([System.Guid]::NewGuid()).txt" />
-		</ItemGroup>
-		<WriteLinesToFile File="@(FeralExpressions_AllCompileItemsFile)" Lines="@(Compile->'%(FullPath)', '&#xD;&#xA;')" Overwrite="true" Encoding="Unicode" />
-		<Exec Command="dotnet $(MSBuildThisFileDirectory)..\FeralExpressionsCore.Generator\bin\$(Configuration)\$(TargetFramework)\FeralExpressionsCore.Generator.dll &quot;.expressions&quot; -f &quot;@(FeralExpressions_AllCompileItemsFile)&quot;" ConsoleToMSBuild="true">
-			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
-		</Exec>
-		<Delete Files="@(FeralExpressions_AllCompileItemsFile)" />
-		<Message Text="FeralExpressionsCore.Generator produced the following files" Importance="high" />
-		<Message Text="@(ExpressionsCompile)" Importance="high" />
-		<ItemGroup>
-			<Compile Include="@(ExpressionsCompile)" Exclude="@(Compile)" />
-		</ItemGroup>
-	</Target>
 
 </Project>

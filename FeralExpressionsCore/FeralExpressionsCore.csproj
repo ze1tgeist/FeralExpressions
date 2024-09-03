@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <Configurations>Debug;Release;Release_netcore30</Configurations>
-    <Version>5.1.0</Version>
+    <TargetFramework>net8.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+    <Version>5.3.0</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -14,9 +14,10 @@ In order for this to work, the method must
 (b) have an expression body 
 (c) have any references to this explicitly written</Description>
     <Copyright>Copyright 2018</Copyright>
-    <PackageReleaseNotes>
-		- Support for overloading methods
-		- Removed excess logging from the build panel
+    <PackageReleaseNotes>- fixed a bug with the .targets file that was preventing updating .expressions.cs files
+- fixed a warning about expressions files twice in Compile
+- added using System to the .expressions file if it wasnt already there
+- updated dependencies to dotnet8 and efcore 6
 	</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
@@ -26,11 +27,7 @@ In order for this to work, the method must
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-preview.7.20365.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.7.20365.15" />
-  </ItemGroup>
-
-  <ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
 	  <ProjectReference Include="..\FeralExpressionsCore.Generator\FeralExpressionsCore.Generator.csproj">
 		  <PrivateAssets>None</PrivateAssets>
 	  </ProjectReference>
