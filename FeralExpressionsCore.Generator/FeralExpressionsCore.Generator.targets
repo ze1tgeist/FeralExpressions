@@ -33,10 +33,10 @@
 		<Message Text="@(ExpressionsCompile)" Importance="low" />
 		<ItemGroup>
 			<Analyzer />
-			<TempCompile Include="@(Compile)">
+			<TempCompile Include="@(Compile)" Condition="'@(Compile)' != ''" >
 				<RelativePath>$([MSBuild]::MakeRelative('$(MSBuildProjectDirectory)', '%(Compile.FullPath)'))</RelativePath>
 			</TempCompile>
-			<TempCompile Include="@(ExpressionsCompile)" >
+			<TempCompile Include="@(ExpressionsCompile)"  Condition="'@(ExpressionsCompile)' != ''" >
 				<RelativePath>$([MSBuild]::MakeRelative('$(MSBuildProjectDirectory)', '%(ExpressionsCompile.FullPath)'))</RelativePath>
 			</TempCompile>
 			<RelativeTempCompile Include="@(TempCompile->'%(RelativePath)')" />

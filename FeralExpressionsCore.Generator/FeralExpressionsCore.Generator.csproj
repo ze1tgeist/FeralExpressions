@@ -8,7 +8,7 @@
 	<IncludeBuiltProjectOutputGroup>true</IncludeBuiltProjectOutputGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<IsTool>true</IsTool>
-    <Version>5.3.0</Version>
+    <Version>5.3.1</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -24,7 +24,8 @@ public static Expression&amp;lt;Func&amp;lt;string,string&amp;gt;&amp;gt; Test_E
     <PackageReleaseNotes>- fixed a bug with the .targets file that was preventing updating .expressions.cs files
 - fixed a warning about expressions files twice in Compile
 - added using System to the .expressions file if it wasnt already there
-- updated dependencies to dotnet8 and efcore 6</PackageReleaseNotes>
+- updated dependencies to dotnet8 and efcore 6
+- fixed a bug where it errored if there were NO .expressions files</PackageReleaseNotes>
     <PackageTags>Linq EntityFramework Expressions Inline</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
