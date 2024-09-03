@@ -70,6 +70,21 @@ namespace FeralExpressionsCore.Generator.Tests
 
         }
 
+        [TestMethod]
+        public void ExpressionPartialClassGenerator_adds_Required_Usings()
+        {
+            var sut = new ExpressionsPartialClassGenerator(new MethodToExpressionConverter(), ".expressions");
+
+            var root = ReadRoot(@"MissingSystemUsingClass.cs");
+
+            var actual = sut.Generate(root)?.ToFullString();
+
+            string expected = "using System;\r\nusing System.Linq.Expressions;\r\nnamespace FeralExpressionsCore.Generator.Tests\r\n{\r\n    public partial class Test\r\n    {\r\n        public static Expression<Func<Test,int>> Func_Expression =>\r\n        (Test _this) => 1;\r\n    }\r\n}\r\n";
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
         private CompilationUnitSyntax ReadRoot(string path)
         {
             var code = ReadFile(path);

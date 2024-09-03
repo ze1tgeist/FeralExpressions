@@ -74,17 +74,7 @@ namespace FeralExpressionsCore.Generator
                 return root
                     .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(GetMembers(root, expressionsStillToHome)))
                     .WithUsings(
-                        root.Usings.Add(
-                            root.Usings.First().WithName(
-                                SyntaxFactory.QualifiedName(
-                                    SyntaxFactory.QualifiedName(
-                                        SyntaxFactory.IdentifierName("System"),
-                                        SyntaxFactory.IdentifierName("Linq")
-                                    ),
-                                    SyntaxFactory.IdentifierName("Expressions")
-                                )
-                            )
-                        )
+                        AddUsingsIfRequired(root.Usings)
                      );
             }
             if (oldNode is ClassDeclarationSyntax classDec)
@@ -101,6 +91,39 @@ namespace FeralExpressionsCore.Generator
             {
                 return null;
             }
+        }
+
+        private SyntaxList<UsingDirectiveSyntax> AddUsingsIfRequired(SyntaxList<UsingDirectiveSyntax> original)
+        {
+            var usedNames =
+                original
+                .Select(u => u.Name.ToString())
+                .ToArray();
+            var usings = original;
+            if (!usedNames.Contains("System"))
+            {
+                usings = usings.Add(CreateUsingSyntax("System"));
+            }
+            if (!usedNames.Contains("System.Linq.Expressions"))
+            {
+                usings = usings.Add(CreateUsingSyntax("System.Linq.Expressions"));
+            }
+
+            return usings;
+        }
+
+        private UsingDirectiveSyntax CreateUsingSyntax(string name)
+        {
+            var nameSyntax = 
+                name.Split(".")
+                .Select(nm => SyntaxFactory.IdentifierName(nm))
+                .Aggregate((NameSyntax)null, (acc, nm) => acc == null ? nm : SyntaxFactory.QualifiedName(acc, nm));
+
+            return
+                SyntaxFactory.UsingDirective(
+                    nameSyntax.WithLeadingTrivia(SyntaxFactory.Space)
+                )
+                .WithTrailingTrivia(SyntaxFactory.EndOfLine("\r\n"));
         }
 
         private IEnumerable<MemberDeclarationSyntax> GetMembers(SyntaxNode oldNode, List<MethodExpression> expressionsStillToHome)
