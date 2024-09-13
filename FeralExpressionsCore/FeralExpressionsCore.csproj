@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Configurations>Debug;Release</Configurations>
-    <Version>5.3.1</Version>
+    <Version>5.3.2</Version>
     <Authors>ruben morton</Authors>
     <Company />
     <Product />
@@ -18,7 +18,8 @@ In order for this to work, the method must
 - fixed a warning about expressions files twice in Compile
 - added using System to the .expressions file if it wasnt already there
 - updated dependencies to dotnet8 and efcore 6
-- fixed a bug where it errored if there were NO .expressions files</PackageReleaseNotes>
+- fixed a bug where it errored if there were NO .expressions files
+- incremental build improvements</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ze1tgeist/FeralExpressions</PackageProjectUrl>
     <PackageTags>Linq EntityFrameworkCore Expressions Inline</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

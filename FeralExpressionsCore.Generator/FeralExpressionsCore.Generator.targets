@@ -13,7 +13,7 @@
 		<ItemGroup>
 			<FeralExpressions_AllCompileItemsFile Include="$(FeralExpressionFileName)" />
 			<FeralExpressions_NonExpressions Include="@(Compile)" />
-			<FeralExpressions_NonExpressions Remove="*.expressions.cs" />
+			<FeralExpressions_NonExpressions Remove="**/*.expressions.cs" />
 		</ItemGroup>
 	</Target>
 	
@@ -25,7 +25,7 @@
 		<WriteLinesToFile File="@(FeralExpressions_AllCompileItemsFile)" Lines="@(FeralExpressions_NonExpressions->'%(FullPath)', '&#13;&#10;')" Overwrite="true" Encoding="Unicode" />
 	</Target>
 	
-	<Target Name="GenerateFeralExpressions" BeforeTargets="CoreCompile" Inputs="@(FeralExpressions_AllCompileItemsFile)" Outputs="@(Compile)">
+	<Target Name="GenerateFeralExpressions" BeforeTargets="CoreCompile" Inputs="@(FeralExpressions_AllCompileItemsFile)" Outputs="@(IntermediateAssembly)">
 		<Exec Command="dotnet $(FeralExpressionsGeneratorAssemblyPath) &quot;.expressions&quot; -f &quot;@(FeralExpressions_AllCompileItemsFile)&quot;" ConsoleToMSBuild="true" >
 			<Output TaskParameter="ConsoleOutput" ItemName="ExpressionsCompile" />
 		</Exec>
